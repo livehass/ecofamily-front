@@ -6,12 +6,16 @@ function Navbar() {
           <div className="text-2xl font-bold uppercase">ecoFamily</div>
 
           <div className="flex gap-4">
+          <div className="hover:underline">Home</div>
+          <div className="hover:underline">Sobre Nós</div>
+
             <div className="hover:underline">Produtos</div>
             <div className="hover:underline">Categorias</div>
             <div className="hover:underline">Carrinho (4)</div>
 
             <div className="hover:underline">Perfil</div>
             <div className="hover:underline">Sair</div>
+            <div className="hover:underline">Contato</div>
           </div>
         </div>
       </div>
