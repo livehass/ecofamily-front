@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Navbar() {
   return (
     <>
@@ -6,8 +8,34 @@ function Navbar() {
           <div className="text-2xl font-bold uppercase">ecoFamily</div>
 
           <div className="flex gap-4">
-          <div className="hover:underline">Home</div>
-          <div className="hover:underline">Sobre Nós</div>
+            <div>
+              <NavLink
+                to="/"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Home
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/sobre"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Sobre Nós
+              </NavLink>
+            </div>
 
             <div className="hover:underline">Produtos</div>
             <div className="hover:underline">Categorias</div>
@@ -15,7 +43,20 @@ function Navbar() {
 
             <div className="hover:underline">Perfil</div>
             <div className="hover:underline">Sair</div>
-            <div className="hover:underline">Contato</div>
+            <div className="hover:underline">
+              <NavLink
+                to="/contato"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Contato
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>
