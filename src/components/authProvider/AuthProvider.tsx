@@ -7,10 +7,10 @@ import { login } from '../../service/Service';
 export default function AuthProvider({children}: AuthProviderProps){
     const initialUser: UserLogin ={
         id: 0,
-        name: "",
+        nome: "",
         email: "",
-        picture: "",
-        password: "",
+        foto: "",
+        senha: "",
         token: "",
     };
 
@@ -27,7 +27,7 @@ return JSON.parse(
     async function handleLogin(userLogin: UserLogin) {
         setIsLoading(true);
         try {
-            await login("usuarios/login", userLogin,  setUser);
+            await login("usuarios/login", userLogin, setUser);
             alert("User logged sucessfully");
             setIsLoading(false);
     } catch (error) {
