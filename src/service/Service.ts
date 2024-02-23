@@ -2,11 +2,16 @@ import axios from "axios";
 import User from "../model/User";
 import UserLogin from "../model/UserLogin";
 
-axios.defaults.baseURL = "https://ecofamily.onrender.com/";
+axios.defaults.baseURL = "https://ecofamily.onrender.com";
 
 export async function createUser(url: string, data: User) {
   const response = await axios.post(url, data);
   return response.data;
+}
+
+export const register = async(url: string, data: Object, setData: Function, header: Object) => {
+  const respose = await axios.post(url, data, header)
+  setData(respose.data)
 }
 
 export async function login(
