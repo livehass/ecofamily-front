@@ -39,7 +39,7 @@ function Navbar() {
 
             <div className="hover:underline">Produtos</div>
             <div className="hover:underline">Categorias</div>
-            <div className="hover:underline">Carrinho (4)</div>
+            <div className="hover:underline">Carrinho (5)</div>
 
             <div className="hover:underline">Perfil</div>
             <div className="hover:underline">Sair</div>
