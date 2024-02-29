@@ -4,6 +4,7 @@ import CreateCategoryButton from "../cards/CreateCategoryButton";
 import CategoryCard from "../cards/CategoryCard";
 import Category from "../../model/Category";
 import { find } from "../../service/Service";
+import UserLogin from "../../model/UserLogin";
 
 export async function loader() {
   const categories = await find("/categorias");

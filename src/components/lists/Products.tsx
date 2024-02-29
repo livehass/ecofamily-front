@@ -5,13 +5,14 @@ import Category from "../../model/Category";
 import { findProducts } from "../../service/Service";
 import ProductCard from "../cards/ProductCard";
 import CreateProductButton from "../cards/CreateProductButton";
+import User from "../../model/User";
 
 export async function loader() {
   const { products, categories } = await findProducts();
   return { products, categories };
 }
 export default function Products() {
-  const { products, categories } = useLoaderData() as {
+  const { products, categories, users } = useLoaderData() as {
     products: Product[];
     categories: Category[];
   };
@@ -28,11 +29,11 @@ export default function Products() {
             <LoadingCategoryCardContainer />
           ) : products.length === 0 ? (
             <>
-              <CreateProductButton categories={categories} />
+              <CreateProductButton categories={categories} users={users} />
             </>
           ) : (
             <>
-              <CreateProductButton categories={categories} />
+              <CreateProductButton categories={categories} users={users} />
               {products.map((product) => (
                 <ProductCard
                   key={product.id}

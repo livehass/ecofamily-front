@@ -58,14 +58,14 @@ export async function find(url: string) {
 
 export async function findProducts() {
   const products = await find("/produtos");
-  const categories = await find("/categories");
+  const categories = await find("/categorias");
 
   return { products, categories };
 }
 
 // Post
-export async function create(url: string, data: object, header: object) {
-  const response = await axios.post(url, data, header);
+export async function create(url: string, data: object) {
+  const response = await axios.post(url, data);
   return response;
 }
 

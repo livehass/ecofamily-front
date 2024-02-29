@@ -2,6 +2,7 @@ import { Form, redirect } from "react-router-dom";
 import Product from "../../model/Product";
 import { create } from "../../service/Service";
 import Category from "../../model/Category";
+import User from "../../model/User";
 
 export async function action({ request }: { request: any }) {
   // const token = (
@@ -11,10 +12,15 @@ export async function action({ request }: { request: any }) {
   // if (!sessionStorage.getItem("userLogin")) return redirect("/login");
 
   const formData = await request.formData();
-  const product = Object.fromEntries(formData) as Product;
+  const data = Object.fromEntries(formData);
+  const product = {
+    ...data,
+    categoria: { id: data.categoria },
+    usuario: { id: 1 },
+  } as Product;
   console.log(product);
 
-  await create("/produtos", product, { headers: { Authorization: token } });
+  await create("/produtos", product);
   return redirect("/produtos");
 }
 
@@ -63,9 +69,10 @@ export default function ProductForm({
         id="quantidade"
         required
       />
+
       <select
-        id="tema"
-        name="tema"
+        id="categoria"
+        name="categoria"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       >
         {categories.map((category: Category) => {

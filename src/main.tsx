@@ -14,6 +14,7 @@ import Products from "./components/lists/Products.tsx";
 import { loader as categoryLoader } from "./components/lists/Categories.tsx";
 import { action as categoryAction } from "./components/forms/CategoryForm.tsx";
 import { loader as productLoader } from "./components/lists/Products.tsx";
+import { action as productAction } from "./components/forms/ProductForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
         path: "/produtos",
         element: <Products />,
         loader: productLoader,
+        action: productAction,
       },
     ],
   },
