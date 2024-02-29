@@ -36,9 +36,35 @@ function Navbar() {
                 Sobre Nós
               </NavLink>
             </div>
+            <div>
+              <NavLink
+                to="/produtos"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Produtos
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/categorias"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Categorias
+              </NavLink>
+            </div>
 
-            <div className="hover:underline">Produtos</div>
-            <div className="hover:underline">Categorias</div>
             <div className="hover:underline">Carrinho (5)</div>
 
             <div className="hover:underline">Perfil</div>

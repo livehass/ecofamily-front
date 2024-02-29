@@ -2,10 +2,10 @@
 import axios from "axios";
 import User from "../model/User";
 import UserLogin from "../model/UserLogin";
-import Category from "../model/Category";
-import Product from "../model/Product";
+// import Category from "../model/Category";
+// import Product from "../model/Product";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL = "https://ecofamily.onrender.com";
 
 // Post user
 export async function createUser(url: string, data: User) {
@@ -51,35 +51,22 @@ export async function login(
 }
 
 // Get
-export async function find(
-  url: string,
-  setData:
-    | React.Dispatch<React.SetStateAction<Category[]>>
-    | React.Dispatch<React.SetStateAction<Category>>
-    | React.Dispatch<React.SetStateAction<Product>>
-    | React.Dispatch<React.SetStateAction<Product[]>>
-    | React.Dispatch<React.SetStateAction<User>>,
-  header: object
-) {
-  const response = await axios.get(url, header);
-  if (url.includes("/usuarios")) {
-    if (response.data.foto === null) response.data.foto = "";
-  }
-  setData(response.data);
+export async function find(url: string) {
+  const response = await axios.get(url);
+  return response.data;
+}
+
+export async function findProducts() {
+  const products = await find("/produtos");
+  const categories = await find("/categorias");
+
+  return { products, categories };
 }
 
 // Post
-export async function create(
-  url: string,
-  data: object,
-  setData:
-    | React.Dispatch<React.SetStateAction<Category>>
-    | React.Dispatch<React.SetStateAction<Product>>,
-  header: object
-) {
-  const response = await axios.post(url, data, header);
-  console.log(response);
-  setData(response.data);
+export async function create(url: string, data: object) {
+  const response = await axios.post(url, data);
+  return response;
 }
 
 // Put
