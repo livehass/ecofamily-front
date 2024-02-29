@@ -9,6 +9,11 @@ import AboutUs from "./pages/about/About.tsx";
 import Login from "./pages/login/Login.tsx";
 import Register from "./pages/register/Register.tsx";
 import AuthProvider from "./components/authProvider/AuthProvider.tsx";
+import Categories from "./components/lists/Categories.tsx";
+import Products from "./components/lists/Products.tsx";
+import { loader as categoryLoader } from "./components/lists/Categories.tsx";
+import { action as categoryAction } from "./components/forms/CategoryForm.tsx";
+import { loader as productLoader } from "./components/lists/Products.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +34,19 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/register",
+        path: "/cadastrar",
         element: <Register />,
+      },
+      {
+        path: "/categorias",
+        element: <Categories />,
+        loader: categoryLoader,
+        action: categoryAction,
+      },
+      {
+        path: "/produtos",
+        element: <Products />,
+        loader: productLoader,
       },
     ],
   },
