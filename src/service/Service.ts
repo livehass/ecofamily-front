@@ -13,16 +13,16 @@ export async function createUser(url: string, data: User) {
   return response.data;
 }
 
-// Post user
-export const register = async (
-  url: string,
-  data: Object,
-  setData: Function,
-  header: Object
-) => {
-  const respose = await axios.post(url, data, header);
-  setData(respose.data);
-};
+// // Post user
+// export const register = async (
+//   url: string,
+//   data: Object,
+//   setData: Function,
+//   header: Object
+// ) => {
+//   const respose = await axios.post(url, data, header);
+//   setData(respose.data);
+// };
 
 // Put user
 export async function updateUser(
