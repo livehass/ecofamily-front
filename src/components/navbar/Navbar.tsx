@@ -24,6 +24,34 @@ function Navbar() {
             </div>
             <div>
               <NavLink
+                to="/produtos"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Produtos
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/categorias"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Categorias
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
                 to="/sobre"
                 className={({ isActive, isPending }) =>
                   isActive
@@ -36,16 +64,9 @@ function Navbar() {
                 Sobre Nós
               </NavLink>
             </div>
-
-            <div className="hover:underline">Produtos</div>
-            <div className="hover:underline">Categorias</div>
-            <div className="hover:underline">Carrinho (5)</div>
-
-            <div className="hover:underline">Perfil</div>
-            <div className="hover:underline">Sair</div>
-            <div className="hover:underline">
+            <div>
               <NavLink
-                to="/contato"
+                to="/login"
                 className={({ isActive, isPending }) =>
                   isActive
                     ? "underline"
@@ -54,9 +75,12 @@ function Navbar() {
                     : "hover:underline"
                 }
               >
-                Contato
+                Entrar
               </NavLink>
             </div>
+
+            <div className="hover:underline">Sair</div>
+            <div className="hover:underline">Carrinho (5)</div>
           </div>
         </div>
       </div>
