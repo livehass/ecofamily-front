@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Category from "../../model/Category";
+import Category from "../../../model/Category";
 
 export default function CategoryCard({ category }: { category: Category }) {
   return (

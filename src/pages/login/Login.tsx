@@ -29,7 +29,7 @@ function Login() {
   function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     alert("teste");
-    handleLogin(userLogin)
+    handleLogin(userLogin);
   }
 
   return (
@@ -83,7 +83,7 @@ function Login() {
 
           <p>
             Ainda não tem uma conta?{" "}
-            <Link to="/register" className="text-indigo-800 hover:underline">
+            <Link to="/cadastrar" className="text-indigo-800 hover:underline">
               Cadastre-se
             </Link>
           </p>

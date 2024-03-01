@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation } from "react-router-dom";
-import LoadingCategoryCardContainer from "../cards/LoadingCategoryCardContainer";
-import CreateCategoryButton from "../cards/CreateCategoryButton";
-import CategoryCard from "../cards/CategoryCard";
+import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
+import CreateCategoryButton from "../cards/category/CreateCategoryButton";
+import CategoryCard from "../cards/category/CategoryCard";
 import Category from "../../model/Category";
 import { find } from "../../service/Service";
 import UserLogin from "../../model/UserLogin";

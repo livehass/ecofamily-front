@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ProductForm from "../forms/ProductForm";
+import CategoryForm from "../../forms/CategoryForm";
 
-export default function CreateProductButton({ categories, users }) {
+export default function CreateCategoryButton() {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
@@ -20,9 +20,9 @@ export default function CreateProductButton({ categories, users }) {
         />
       </button>
       {isClicked ? (
-        <ProductForm users={users} categories={categories} />
+        <CategoryForm />
       ) : (
-        <h3 className="font-bold transition-all">Novo produto</h3>
+        <h3 className="font-bold transition-all">Nova categoria</h3>
       )}
     </article>
   );

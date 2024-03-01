@@ -53,6 +53,7 @@ export async function login(
 // Get
 export async function find(url: string) {
   const response = await axios.get(url);
+  console.log(response);
   return response.data;
 }
 
