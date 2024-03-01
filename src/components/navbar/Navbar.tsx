@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/UserContext";
 
 function Navbar() {
+  const { user, handleLogout } = useContext(AuthContext);
+  const token = user.token;
+
   return (
     <>
       <div className="w-full bg-lime-950 text-white flex justify-center py-4">
@@ -65,21 +70,36 @@ function Navbar() {
               </NavLink>
             </div>
             <div>
-              <NavLink
-                to="/login"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Entrar
-              </NavLink>
+              {token === "" ? (
+                <NavLink
+                  to="/login"
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? "underline"
+                      : isPending
+                      ? "animate-pulse"
+                      : "hover:underline"
+                  }
+                >
+                  Entrar
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/login"
+                  className={({ isActive, isPending }) =>
+                    isActive
+                      ? "underline"
+                      : isPending
+                      ? "animate-pulse"
+                      : "hover:underline"
+                  }
+                  onClick={handleLogout}
+                >
+                  Sair
+                </NavLink>
+              )}
             </div>
 
-            <div className="hover:underline">Sair</div>
             <div className="hover:underline">Carrinho (5)</div>
           </div>
         </div>

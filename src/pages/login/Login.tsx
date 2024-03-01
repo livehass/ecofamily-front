@@ -5,19 +5,13 @@ import UserLogin from "../../model/UserLogin";
 import { RotatingLines } from "react-loader-spinner";
 
 function Login() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [userLogin, setUserLogin] = useState<UserLogin>({} as UserLogin);
 
   const { user, handleLogin } = useContext(AuthContext);
 
   const { isLoading } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (userLogin.token !== "") {
-      navigate("/login");
-    }
-  }, [user]);
 
   function updateState(e: ChangeEvent<HTMLInputElement>) {
     setUserLogin({
@@ -26,10 +20,14 @@ function Login() {
     });
   }
 
+  useEffect(() => {
+    if (user.token !== "") navigate("/produtos");
+  }, []);
+
   function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    alert("teste");
     handleLogin(userLogin);
+    navigate("/produtos");
   }
 
   return (

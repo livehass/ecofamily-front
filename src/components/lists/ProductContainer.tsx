@@ -39,7 +39,7 @@ export default function ProductContainer() {
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Visualizar produtos
         </h2>
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <Form
             className="w-full flex flex-col items-center justify-center"
             method="put"
@@ -114,6 +114,14 @@ export default function ProductContainer() {
               className="mt-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
               Salvar
+            </button>
+          </Form>
+          <Form action="delete" method="delete">
+            <button
+              type="submit"
+              className="mt-6 text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            >
+              Deletar
             </button>
           </Form>
         </div>

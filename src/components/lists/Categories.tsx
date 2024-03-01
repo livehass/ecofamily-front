@@ -4,11 +4,9 @@ import CreateCategoryButton from "../cards/category/CreateCategoryButton";
 import CategoryCard from "../cards/category/CategoryCard";
 import Category from "../../model/Category";
 import { find } from "../../service/Service";
-import UserLogin from "../../model/UserLogin";
 
 export async function loader() {
   const categories = await find("/categorias");
-  console.log(categories);
   return { categories };
 }
 export default function Categories() {

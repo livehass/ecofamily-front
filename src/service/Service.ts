@@ -53,7 +53,6 @@ export async function login(
 // Get
 export async function find(url: string) {
   const response = await axios.get(url);
-  console.log(response);
   return response.data;
 }
 
@@ -62,6 +61,12 @@ export async function findProducts() {
   const categories = await find("/categorias");
 
   return { products, categories };
+}
+
+export async function findCategory(url: string, header: object) {
+  const response = await axios.get(url, header);
+  console.log(response);
+  return response.data;
 }
 
 // Post

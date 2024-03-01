@@ -1,26 +1,45 @@
 import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
-import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
-import Product from "../../model/Product";
 import Category from "../../model/Category";
-import { find, update } from "../../service/Service";
-import ProductCard from "../cards/product/ProductCard";
-import CreateProductButton from "../cards/product/CreateProductButton";
+import { findCategory, update } from "../../service/Service";
+import UserLogin from "../../model/UserLogin";
 
 export async function loader({ params }) {
-  const category = await find(`/categorias/${params.id}`);
+  const token =
+    sessionStorage.getItem("userLogin") !== null
+      ? (JSON.parse(sessionStorage.getItem("userLogin") as string) as UserLogin)
+          .token
+      : null;
+
+  if (token === null) return redirect("/login");
+
+  const category = await findCategory(`/categorias/${params.id}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
+
   return { category };
 }
 
 export async function singleCategoryAction({ request, params }) {
-  //const category = (await find(`/categorias/${params.id}`)) as Category;
+  const token =
+    sessionStorage.getItem("userLogin") !== null
+      ? (JSON.parse(sessionStorage.getItem("userLogin") as string) as UserLogin)
+          .token
+      : null;
+
+  if (token === null) return redirect("/login");
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   const newCategory = {
     ...data,
-  } as Category;
+  };
   newCategory.id = params.id;
+  newCategory.perecivel === "on"
+    ? (newCategory.perecivel = true)
+    : (newCategory.perecivel = false);
   console.log(data.usuario);
-  await update("/categorias", newCategory);
+  await update("/categorias", newCategory as Category);
   return redirect("/categorias");
 }
 
@@ -36,7 +55,7 @@ export default function CategoryContainer() {
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Visualizar produtos
         </h2>
-        <div className="flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
           <Form
             className="w-full flex flex-col items-center justify-center"
             method="put"
@@ -50,11 +69,21 @@ export default function CategoryContainer() {
               defaultValue={category.descricao}
               required
             />
+            <label>Perecível</label>
+            <input type="checkbox" id="perecivel" name="perecivel" />
             <button
               type="submit"
               className="mt-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >
               Salvar
+            </button>
+          </Form>
+          <Form action="delete" method="delete">
+          <button
+              type="submit"
+              className="mt-6 text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            >
+              Deletar
             </button>
           </Form>
         </div>
