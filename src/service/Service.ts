@@ -53,6 +53,7 @@ export async function login(
 // Get
 export async function find(url: string) {
   const response = await axios.get(url);
+  console.log(response);
   return response.data;
 }
 
@@ -70,14 +71,9 @@ export async function create(url: string, data: object) {
 }
 
 // Put
-export const update = async (
-  url: string,
-  dados: object,
-  setDados: Function,
-  header: Object
-) => {
-  const resposta = await axios.put(url, dados, header);
-  setDados(resposta.data);
+export const update = async (url: string, dados: object) => {
+  const response = await axios.put(url, dados);
+  return response.data;
 };
 
 // Delete

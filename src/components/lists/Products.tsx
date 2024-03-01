@@ -1,18 +1,17 @@
 import { useLoaderData, useNavigation } from "react-router-dom";
-import LoadingCategoryCardContainer from "../cards/LoadingCategoryCardContainer";
+import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
 import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { findProducts } from "../../service/Service";
-import ProductCard from "../cards/ProductCard";
-import CreateProductButton from "../cards/CreateProductButton";
-import User from "../../model/User";
+import ProductCard from "../cards/product/ProductCard";
+import CreateProductButton from "../cards/product/CreateProductButton";
 
 export async function loader() {
   const { products, categories } = await findProducts();
   return { products, categories };
 }
 export default function Products() {
-  const { products, categories, users } = useLoaderData() as {
+  const { products, categories } = useLoaderData() as {
     products: Product[];
     categories: Category[];
   };
@@ -29,11 +28,11 @@ export default function Products() {
             <LoadingCategoryCardContainer />
           ) : products.length === 0 ? (
             <>
-              <CreateProductButton categories={categories} users={users} />
+              <CreateProductButton categories={categories} />
             </>
           ) : (
             <>
-              <CreateProductButton categories={categories} users={users} />
+              <CreateProductButton categories={categories} />
               {products.map((product) => (
                 <ProductCard
                   key={product.id}

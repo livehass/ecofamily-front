@@ -1,5 +1,6 @@
-import Category from "../../model/Category";
-import Product from "../../model/Product";
+import { Link } from "react-router-dom";
+import Category from "../../../model/Category";
+import Product from "../../../model/Product";
 
 export default function ProductCard({
   product,
@@ -17,11 +18,11 @@ export default function ProductCard({
         />
       </a>
       <div className="px-5 pb-5">
-        <a href="#">
+        <Link to={`/produtos/${product.id}`}>
           <h5 className="text-xl font-semibold tracking-tight text-gray-900">
             {product.nome}
           </h5>
-        </a>
+        </Link>
         <div className="flex items-center mt-2.5 mb-5">
           <div className="flex items-center space-x-1 rtl:space-x-reverse">
             <svg
