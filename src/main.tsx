@@ -15,8 +15,17 @@ import { loader as categoryLoader } from "./components/lists/Categories.tsx";
 import { action as categoryAction } from "./components/forms/CategoryForm.tsx";
 import { loader as productLoader } from "./components/lists/Products.tsx";
 import { action as productAction } from "./components/forms/ProductForm.tsx";
-import { loader as singularProductLoader } from "./components/lists/ProductContainer.tsx";
+import {
+  singleProductAction,
+  loader as singularProductLoader,
+} from "./components/lists/ProductContainer.tsx";
+import {
+  singleCategoryAction,
+  loader as singularCategoryLoader,
+} from "./components/lists/CategoryContainer.tsx";
+
 import ProductContainer from "./components/lists/ProductContainer.tsx";
+import CategoryContainer from "./components/lists/CategoryContainer.tsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +56,12 @@ const router = createBrowserRouter([
         action: categoryAction,
       },
       {
+        path: "/categorias/:id",
+        element: <CategoryContainer />,
+        loader: singularCategoryLoader,
+        action: singleCategoryAction,
+      },
+      {
         path: "/produtos",
         element: <Products />,
         loader: productLoader,
@@ -56,6 +71,7 @@ const router = createBrowserRouter([
         path: "/produtos/:id",
         element: <ProductContainer />,
         loader: singularProductLoader,
+        action: singleProductAction,
       },
     ],
   },

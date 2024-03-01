@@ -1,16 +1,31 @@
-import { Form, useLoaderData, useNavigation } from "react-router-dom";
+import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
 import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
 import Product from "../../model/Product";
 import Category from "../../model/Category";
-import { find } from "../../service/Service";
+import { find, update } from "../../service/Service";
 import ProductCard from "../cards/product/ProductCard";
 import CreateProductButton from "../cards/product/CreateProductButton";
 
 export async function loader({ params }) {
-  const { product } = await find(`/produtos/${params.id}`);
-  const { categories } = await find(`/categorias`);
+  const product = await find(`/produtos/${params.id}`);
+  const categories = await find(`/categorias`);
   return { product, categories };
 }
+
+export async function singleProductAction({ request, params }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const product = {
+    ...data,
+    categoria: { id: data.categoria },
+    usuario: { id: 1 },
+  } as Product;
+  product.id = params.id;
+  console.log(data.usuario);
+  await update("/produtos", product);
+  return redirect("/produtos");
+}
+
 export default function ProductContainer() {
   const { product, categories } = useLoaderData() as {
     product: Product;
@@ -45,7 +60,11 @@ export default function ProductContainer() {
               type="text"
               name="descricao"
               id="descricao"
-              defaultValue={product.descricao}
+              defaultValue={
+                product.descricao != null
+                  ? product.descricao
+                  : "Produto sem descrição"
+              }
               required
             />
             <input
@@ -67,6 +86,13 @@ export default function ProductContainer() {
               id="quantidade"
               defaultValue={product.quantidade}
               required
+            />
+            <input
+              type="number"
+              value={product.usuario.id}
+              disabled
+              className="hidden"
+              name="usuario"
             />
 
             <select
