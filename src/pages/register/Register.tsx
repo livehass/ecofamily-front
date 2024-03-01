@@ -1,5 +1,4 @@
-import { ChangeEvent } from "react";
-import { Form, redirect } from "react-router-dom";
+import { Form, redirect, useNavigation } from "react-router-dom";
 import User from "../../model/User";
 import { createUser } from "../../service/Service";
 
@@ -16,14 +15,21 @@ export async function createNewUser({ request }) {
       alert("Oops, ocorreu algum erro...");
       console.log(error);
     }
+  } else {
+    alert("As senhas devem corresponder e ter pelo menos 8 caracteres");
   }
-  alert("As senhas devem corresponder e ter pelo menos 8 caracteres");
+
   return null;
 }
 
 function Register() {
+  const navigation = useNavigation();
   return (
     <>
+      {navigation.state === "loading" ||
+        (navigation.state === "submitting" && (
+          <div className="text-4xl"> CARREGANM DPO</div>
+        ))}
       <div className="grid grid-cols-1 lg:grid-cols-1 h-screen place-items-center font-bold">
         <div className="fundoCadastro hidden lg:block"></div>
         <Form
@@ -85,8 +91,8 @@ function Register() {
             <label htmlFor="confirmPassword">Confirmar Senha</label>
             <input
               type="password"
-              id="confirmarSenha"
-              name="confirmarSenha"
+              id="passwordConfirm"
+              name="passwordConfirm"
               placeholder="Confirmar Senha"
               className="border-2 border-slate-700 rounded p-2"
             />

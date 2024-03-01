@@ -7,7 +7,7 @@ import Home from "./pages/home/Home.tsx";
 import Contact from "./pages/contact/Contact.tsx";
 import AboutUs from "./pages/about/About.tsx";
 import Login from "./pages/login/Login.tsx";
-import Register from "./pages/register/Register.tsx";
+import Register, { createNewUser } from "./pages/register/Register.tsx";
 import AuthProvider from "./components/authProvider/AuthProvider.tsx";
 import Categories from "./components/lists/Categories.tsx";
 import Products from "./components/lists/Products.tsx";
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/cadastrar",
         element: <Register />,
+        action: createNewUser,
       },
       {
         path: "/categorias",

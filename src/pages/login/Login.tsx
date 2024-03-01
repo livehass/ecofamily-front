@@ -22,12 +22,11 @@ function Login() {
 
   useEffect(() => {
     if (user.token !== "") navigate("/produtos");
-  }, []);
+  }, [user.token]);
 
   function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     handleLogin(userLogin);
-    navigate("/produtos");
   }
 
   return (
