@@ -24,20 +24,6 @@ function Navbar() {
             </div>
             <div>
               <NavLink
-                to="/sobre"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Sobre Nós
-              </NavLink>
-            </div>
-            <div>
-              <NavLink
                 to="/produtos"
                 className={({ isActive, isPending }) =>
                   isActive
@@ -64,14 +50,9 @@ function Navbar() {
                 Categorias
               </NavLink>
             </div>
-
-            <div className="hover:underline">Carrinho (5)</div>
-
-            <div className="hover:underline">Perfil</div>
-            <div className="hover:underline">Sair</div>
-            <div className="hover:underline">
+            <div>
               <NavLink
-                to="/contato"
+                to="/sobre"
                 className={({ isActive, isPending }) =>
                   isActive
                     ? "underline"
@@ -80,9 +61,26 @@ function Navbar() {
                     : "hover:underline"
                 }
               >
-                Contato
+                Sobre Nós
               </NavLink>
             </div>
+            <div>
+              <NavLink
+                to="/login"
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "underline"
+                    : isPending
+                    ? "animate-pulse"
+                    : "hover:underline"
+                }
+              >
+                Entrar
+              </NavLink>
+            </div>
+
+            <div className="hover:underline">Sair</div>
+            <div className="hover:underline">Carrinho (5)</div>
           </div>
         </div>
       </div>
