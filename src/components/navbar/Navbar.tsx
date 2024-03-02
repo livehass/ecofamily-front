@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 import { AuthContext } from "../../context/UserContext";
 import useOutsideClick from "../../hooks/useClickOutside";
 
@@ -11,6 +12,8 @@ function Navbar() {
   const [favDropdown, setFavDropdown] = useState(false);
   const [cartDropdown, setCartDropdown] = useState(false);
   const ref = useOutsideClick(handleClickOutside);
+
+  const location = useLocation();
 
   function handleClickOutside() {
     setUserDropdown(false);
@@ -25,9 +28,20 @@ function Navbar() {
         className="fixed w-full bg-white text-gray-800 flex justify-center py-4 drop-shadow-md z-50"
       >
         <div className="container flex justify-between gap-64 text-lg items-center">
-          <Link to="/" className="text-2xl font-bold text-green-800">
-            <i className="fa-solid fa-leaf"></i> ecoFamily
-          </Link>
+          {location.pathname != "/" ? (
+            <Link to="/" className="text-2xl font-bold text-green-800">
+              <i className="fa-solid fa-leaf"></i> ecoFamily
+            </Link>
+          ) : (
+            <ScrollLink
+              to="home"
+              smooth={true}
+              duration={500}
+              className="cursor-pointer text-2xl font-bold text-green-800"
+            >
+              <i className="fa-solid fa-leaf"></i> ecoFamily
+            </ScrollLink>
+          )}
 
           <div className="flex items-center bg-gray-50 border rounded-md h-9 px-1 flex-grow has-[:focus-visible]:bg-gray-200/80">
             <input
