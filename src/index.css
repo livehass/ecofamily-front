@@ -11,3 +11,7 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+
+#product-image {
+  height: calc(100% - 7.5rem)
+}

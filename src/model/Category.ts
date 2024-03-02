@@ -4,5 +4,5 @@ export default interface Category {
   id: number;
   descricao: string;
   perecivel: boolean;
-  postagens: Product[] | null;
+  produtos: Product[] | null;
 }

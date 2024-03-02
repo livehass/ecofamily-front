@@ -10,81 +10,85 @@ export default function ProductCard({
 }) {
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-      <a href="#">
+      <Link to={`/produtos/${product.id}`}>
         <img
-          className="p-8 rounded-t-lg"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMnUUgPFbp2kI5b8hK7OTBzn07ZzEHI0ZgRQ&usqp=CAU"
+          id="product-image"
+          className="w-full object-cover drop-shadow-md rounded-md mb-4"
+          src={
+            product.foto == ""
+              ? "https://cdlresende.com.br/wp-content/uploads/2018/03/no-image-icon-4.png"
+              : product.foto
+          }
           alt="product image"
         />
-      </a>
+      </Link>
       <div className="px-5 pb-5">
         <Link to={`/produtos/${product.id}`}>
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900">
+          <h5 className="text-2xl font-semibold tracking-tight text-gray-900">
             {product.nome}
           </h5>
         </Link>
-        <div className="flex items-center mt-2.5 mb-5">
-          <div className="flex items-center space-x-1 rtl:space-x-reverse">
-            <svg
-              className="w-4 h-4 text-yellow-300"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-4 h-4 text-yellow-300"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-4 h-4 text-yellow-300"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-4 h-4 text-yellow-300"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-4 h-4 text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-          </div>
-          <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-            5.0
-          </span>
-        </div>
+
         <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900">
+          <span className="text-xl font-bold text-gray-900">
             R${product.preco}
           </span>
-          <a
-            href="#"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Add to cart
-          </a>
+          <div className="flex items-center border rounded-md divide-x-2">
+            <button
+              onClick={() => {
+                document
+                  .getElementById("fav-icon")
+                  ?.classList.add("animate-custom-ping");
+                setTimeout(
+                  () =>
+                    document
+                      .getElementById("fav-icon")
+                      ?.classList.remove("animate-custom-ping"),
+                  600
+                );
+              }}
+              className="hover:bg-gray-200 rounded-s-md transition-all p-2"
+            >
+              <div className="h-7">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="100%"
+                  fill="rgb(21 128 61)"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M223,57a58.07,58.07,0,0,0-81.92-.1L128,69.05,114.91,56.86A58,58,0,0,0,33,139l89.35,90.66a8,8,0,0,0,11.4,0L223,139a58,58,0,0,0,0-82Zm-11.35,70.76L128,212.6,44.3,127.68a42,42,0,0,1,59.4-59.4l.2.2,18.65,17.35a8,8,0,0,0,10.9,0L152.1,68.48l.2-.2a42,42,0,1,1,59.36,59.44Z"></path>
+                </svg>
+              </div>
+            </button>
+            <button
+              onClick={() => {
+                document
+                  .getElementById("cart-icon")
+                  ?.classList.add("animate-custom-ping");
+                setTimeout(
+                  () =>
+                    document
+                      .getElementById("cart-icon")
+                      ?.classList.remove("animate-custom-ping"),
+                  600
+                );
+              }}
+              className="cursor-pointer hover:bg-gray-200 rounded-e-md transition-all p-2"
+            >
+              <div className="h-7">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="100%"
+                  height="100%"
+                  fill="rgb(21 128 61)"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M96,216a16,16,0,1,1-16-16A16,16,0,0,1,96,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,184,200ZM231.65,74.35l-28.53,92.71A23.89,23.89,0,0,1,180.18,184H84.07A24.11,24.11,0,0,1,61,166.59L24.82,40H8A8,8,0,0,1,8,24H24.82A16.08,16.08,0,0,1,40.21,35.6L48.32,64H224a8,8,0,0,1,7.65,10.35ZM213.17,80H52.89l23.49,82.2a8,8,0,0,0,7.69,5.8h96.11a8,8,0,0,0,7.65-5.65Z"></path>
+                </svg>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

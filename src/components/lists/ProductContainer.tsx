@@ -1,10 +1,7 @@
 import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
-import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
 import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { find, update } from "../../service/Service";
-import ProductCard from "../cards/product/ProductCard";
-import CreateProductButton from "../cards/product/CreateProductButton";
 
 export async function loader({ params }) {
   const product = await find(`/produtos/${params.id}`);
@@ -23,7 +20,7 @@ export async function singleProductAction({ request, params }) {
   product.id = params.id;
   console.log(data.usuario);
   await update("/produtos", product);
-  return redirect("/produtos");
+  return redirect("/");
 }
 
 export default function ProductContainer() {
@@ -37,7 +34,7 @@ export default function ProductContainer() {
     <>
       <div className="w-full py-20">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
-          Visualizar produtos
+          Explorar produtos
         </h2>
         <div className="flex flex-col items-center justify-center">
           <Form
