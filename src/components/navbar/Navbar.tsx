@@ -3,14 +3,16 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { AuthContext } from "../../context/UserContext";
 import useOutsideClick from "../../hooks/useClickOutside";
+import FavoriteProducts from "../lists/FavoriteProducts";
 
 function Navbar() {
-  const { user, handleLogout } = useContext(AuthContext);
+  const { user, handleLogout, favProducts } = useContext(AuthContext);
   const token = user.token;
 
   const [userDropdown, setUserDropdown] = useState(false);
   const [favDropdown, setFavDropdown] = useState(false);
   const [cartDropdown, setCartDropdown] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const ref = useOutsideClick(handleClickOutside);
 
   const location = useLocation();
@@ -82,10 +84,10 @@ function Navbar() {
               <div
                 className={`z-10 ${
                   favDropdown ? "" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-60`}
+                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[14.5rem]`}
               >
                 <svg
-                  className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
+                  className="hidden md:block absolute text-white h-4 right-32 -top-4 rotate-180 drop-shadow-2xl"
                   x="0px"
                   y="0px"
                   viewBox="0 0 255 255"
@@ -102,14 +104,22 @@ function Navbar() {
                   aria-labelledby="dropdownDividerButton"
                 >
                   <li>
-                    <NavLink
-                      to={`users/${user.id}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Favorites
-                    </NavLink>
+                    <div className="block text-center px-4 py-2">Favoritos</div>
+                  </li>
+                  <li>
+                    <FavoriteProducts isExpanded={isExpanded} />
                   </li>
                 </ul>
+                {favProducts.length > 1 && (
+                  <button
+                    onClick={() =>
+                      isExpanded ? setIsExpanded(false) : setIsExpanded(true)
+                    }
+                    className="bg-green-600 text-white font-bold drop-shadow-lg w-full rounded-b-md hover:bg-green-700"
+                  >
+                    {isExpanded ? "Recolher" : "Expandir"}
+                  </button>
+                )}
               </div>
             </li>
             <li
@@ -156,12 +166,7 @@ function Navbar() {
                   aria-labelledby="dropdownDividerButton"
                 >
                   <li>
-                    <NavLink
-                      to={`users/${user.id}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Cart
-                    </NavLink>
+                    <div className="block text-center px-4 py-2">Carrinho</div>
                   </li>
                 </ul>
               </div>
@@ -215,7 +220,9 @@ function Navbar() {
                         to={`users/${user.id}`}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Perfil
+                        {user.tipo === 1
+                          ? "Histórico de compras"
+                          : "Minha loja"}
                       </NavLink>
                     </li>
                     <li>
@@ -223,7 +230,7 @@ function Navbar() {
                         to={"/settings"}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Opções
+                        Configurações
                       </NavLink>
                     </li>
                   </ul>

@@ -2,6 +2,8 @@ import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
 import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { find, update } from "../../service/Service";
+import { useContext } from "react";
+import { AuthContext } from "../../context/UserContext";
 
 export async function loader({ params }) {
   const product = await find(`/produtos/${params.id}`);
@@ -24,11 +26,106 @@ export async function singleProductAction({ request, params }) {
 }
 
 export default function ProductContainer() {
+  const { user, favProducts, setFavProducts } = useContext(AuthContext);
   const { product, categories } = useLoaderData() as {
     product: Product;
     categories: Category[];
   };
-  const navigation = useNavigation();
+  if (product.foto === null) product.foto = "";
+
+  if (user.tipo === 1)
+    return (
+      <div className="bg-gray-100 pb-8 pt-40 min-h-screen">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row -mx-4">
+            <div className="md:flex-1 px-4">
+              <div className="h-[460px] rounded-lg bg-gray-300 mb-4">
+                <img
+                  className="w-full h-full object-cover"
+                  src={
+                    product.foto == ""
+                      ? "https://cdlresende.com.br/wp-content/uploads/2018/03/no-image-icon-4.png"
+                      : product.foto
+                  }
+                  alt="Product Image"
+                />
+              </div>
+              <div className="flex -mx-2 mb-4">
+                <div className="w-1/2 px-2">
+                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                    Adicionar ao carrinho
+                  </button>
+                </div>
+                <div className="w-1/2 px-2">
+                  <button
+                    onClick={() => {
+                      if (
+                        favProducts.filter(
+                          (favProduct) => favProduct.id === product.id
+                        ).length === 0
+                      ) {
+                        document
+                          .getElementById("fav-icon")
+                          ?.classList.add("animate-custom-ping");
+                        setTimeout(
+                          () =>
+                            document
+                              .getElementById("fav-icon")
+                              ?.classList.remove("animate-custom-ping"),
+                          600
+                        );
+                        setFavProducts([...favProducts, product]);
+                        localStorage.setItem(
+                          "favProducts",
+                          JSON.stringify([...favProducts, product])
+                        );
+                      }
+                    }}
+                    className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-bold hover:bg-gray-300"
+                  >
+                    Adicionar aos favoritos
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="md:flex-1 px-4">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                {product.nome}
+              </h2>
+              <div className="flex flex-col gap-4 md:flex-row md:justify-between mb-4">
+                <div className="flex flex-col md:block">
+                  <span className="font-bold text-gray-700">Preço:</span>
+                  <span className="text-gray-600"> R${product.preco}</span>
+                </div>
+                <div className="flex flex-col md:block">
+                  <span className="font-bold text-gray-700">
+                    Disponibilidade:
+                  </span>
+                  <span className="text-gray-600">
+                    {" "}
+                    {product.quantidade > 0 ? "Em estoque" : "Sem estoque"}
+                  </span>
+                </div>
+              </div>
+              <div className="mb-4">
+                <span className="font-bold text-gray-700">Loja:</span>
+                <div className="flex items-center mt-2">
+                  {product.usuario.nome}
+                </div>
+              </div>
+              <div>
+                <span className="font-bold text-gray-700">
+                  Product Description:
+                </span>
+                <p className="text-gray-600 text-sm mt-2">
+                  {product.descricao}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <>

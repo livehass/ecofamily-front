@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Category from "../../../model/Category";
 import Product from "../../../model/Product";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/UserContext";
 
 export default function ProductCard({
   product,
@@ -8,6 +10,7 @@ export default function ProductCard({
   category: Category;
   product: Product;
 }) {
+  const { favProducts, setFavProducts } = useContext(AuthContext);
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <Link to={`/produtos/${product.id}`}>
@@ -36,16 +39,27 @@ export default function ProductCard({
           <div className="flex items-center border rounded-md divide-x-2">
             <button
               onClick={() => {
-                document
-                  .getElementById("fav-icon")
-                  ?.classList.add("animate-custom-ping");
-                setTimeout(
-                  () =>
-                    document
-                      .getElementById("fav-icon")
-                      ?.classList.remove("animate-custom-ping"),
-                  600
-                );
+                if (
+                  favProducts.filter(
+                    (favProduct) => favProduct.id === product.id
+                  ).length === 0
+                ) {
+                  document
+                    .getElementById("fav-icon")
+                    ?.classList.add("animate-custom-ping");
+                  setTimeout(
+                    () =>
+                      document
+                        .getElementById("fav-icon")
+                        ?.classList.remove("animate-custom-ping"),
+                    600
+                  );
+                  setFavProducts([...favProducts, product]);
+                  localStorage.setItem(
+                    "favProducts",
+                    JSON.stringify([...favProducts, product])
+                  );
+                }
               }}
               className="hover:bg-gray-200 rounded-s-md transition-all p-2"
             >

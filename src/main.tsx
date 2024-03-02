@@ -17,7 +17,7 @@ import { loader as productLoader } from "./components/lists/Products.tsx";
 import { action as productAction } from "./components/forms/ProductForm.tsx";
 import {
   singleProductAction,
-  loader as singularProductLoader,
+  loader as singleProductLoader,
 } from "./components/lists/ProductContainer.tsx";
 import {
   singleCategoryAction,
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       {
         path: "/produtos/:id",
         element: <ProductContainer />,
-        loader: singularProductLoader,
+        loader: singleProductLoader,
         action: singleProductAction,
       },
       {

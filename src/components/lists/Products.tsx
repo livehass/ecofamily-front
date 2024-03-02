@@ -4,7 +4,6 @@ import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { findProducts } from "../../service/Service";
 import ProductCard from "../cards/product/ProductCard";
-import CreateProductButton from "../cards/product/CreateProductButton";
 import { useState } from "react";
 
 export async function loader() {
@@ -28,7 +27,7 @@ export default function Products() {
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Explorar produtos
         </h2>
-        <div className="w-full px-4 flex items-center gap-2">
+        <div className="w-full px-4 flex flex-wrap items-center gap-2">
           <button
             onClick={() => {
               setFilteredProducts(products);
@@ -68,11 +67,10 @@ export default function Products() {
             <LoadingCategoryCardContainer />
           ) : filteredProducts.length === 0 ? (
             <>
-              <CreateProductButton categories={categories} />
+              <h2 className="mt-4 text-2xl font-bold col-span-2">Nenhum produto por enquanto...</h2>
             </>
           ) : (
             <>
-              <CreateProductButton categories={categories} />
               {filteredProducts.map((product) => {
                 if (product.foto === null) product.foto = "";
                 return (
