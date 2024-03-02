@@ -115,7 +115,7 @@ function Navbar() {
                     onClick={() =>
                       isExpanded ? setIsExpanded(false) : setIsExpanded(true)
                     }
-                    className="bg-green-600 text-white font-bold drop-shadow-lg w-full rounded-b-md hover:bg-green-700"
+                    className="bg-green-600 text-white font-bold drop-shadow-lg w-full text-xs p-1 rounded-b-md hover:bg-green-700"
                   >
                     {isExpanded ? "Recolher" : "Expandir"}
                   </button>
