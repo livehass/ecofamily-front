@@ -186,56 +186,99 @@ function Navbar() {
                   </svg>
                 </div>
               </div>
-              <div
-                id="dropdownDivider"
-                className={`z-10 ${
-                  userDropdown ? "" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.5rem]`}
-              >
-                <svg
-                  className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 255 255"
-                  xmlSpace="preserve"
+              {token !== "" ? (
+                <div
+                  id="dropdownDivider"
+                  className={`z-10 ${
+                    userDropdown ? "" : "hidden"
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.5rem]`}
                 >
-                  <polygon
-                    className="fill-gray-300"
-                    points="0,0 127.5,127.5 255,0"
-                  />
-                </svg>
-                <ul
-                  ref={ref}
-                  className="py-2 text-sm text-gray-700"
-                  aria-labelledby="dropdownDividerButton"
-                >
-                  <li>
-                    <NavLink
-                      to={`users/${user.id}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to={"/settings"}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      Settings
-                    </NavLink>
-                  </li>
-                </ul>
-                <div className="py-2">
-                  <NavLink
-                    to={"/logout"}
-                    className="block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700"
-                    onClick={handleLogout}
+                  <svg
+                    className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 255 255"
+                    xmlSpace="preserve"
                   >
-                    Log out
-                  </NavLink>
+                    <polygon
+                      className="fill-gray-300"
+                      points="0,0 127.5,127.5 255,0"
+                    />
+                  </svg>
+                  <ul
+                    ref={ref}
+                    className="py-2 text-sm text-gray-700"
+                    aria-labelledby="dropdownDividerButton"
+                  >
+                    <li>
+                      <NavLink
+                        to={`users/${user.id}`}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Profile
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/settings"}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Settings
+                      </NavLink>
+                    </li>
+                  </ul>
+                  <div className="py-2">
+                    <button
+                      className="w-full text-left block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700"
+                      onClick={handleLogout}
+                    >
+                      Log out
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  id="dropdownDivider"
+                  className={`z-10 ${
+                    userDropdown ? "" : "hidden"
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.5rem]`}
+                >
+                  <svg
+                    className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 255 255"
+                    xmlSpace="preserve"
+                  >
+                    <polygon
+                      className="fill-gray-300"
+                      points="0,0 127.5,127.5 255,0"
+                    />
+                  </svg>
+                  <ul
+                    ref={ref}
+                    className="py-2 text-sm text-gray-700"
+                    aria-labelledby="dropdownDividerButton"
+                  >
+                    <li>
+                      <NavLink
+                        to={`/login`}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Login
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/cadastrar"}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Crie uma conta
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </li>
           </ul>
 

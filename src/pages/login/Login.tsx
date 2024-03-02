@@ -21,7 +21,7 @@ function Login() {
   }
 
   useEffect(() => {
-    if (user.token !== "") navigate("/produtos");
+    if (user.token !== "") navigate("/");
   }, [user.token]);
 
   function login(e: ChangeEvent<HTMLFormElement>) {
