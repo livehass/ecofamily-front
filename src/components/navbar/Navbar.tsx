@@ -215,7 +215,7 @@ function Navbar() {
                         to={`users/${user.id}`}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Profile
+                        Perfil
                       </NavLink>
                     </li>
                     <li>
@@ -223,7 +223,7 @@ function Navbar() {
                         to={"/settings"}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Settings
+                        Opções
                       </NavLink>
                     </li>
                   </ul>
@@ -232,7 +232,7 @@ function Navbar() {
                       className="w-full text-left block px-4 py-2 hover:bg-gray-100 text-sm text-gray-700"
                       onClick={handleLogout}
                     >
-                      Log out
+                      Sair
                     </button>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ function Navbar() {
                         to={`/login`}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Login
+                        Entrar
                       </NavLink>
                     </li>
                     <li>
@@ -273,7 +273,7 @@ function Navbar() {
                         to={"/cadastrar"}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
-                        Crie uma conta
+                        Criar conta
                       </NavLink>
                     </li>
                   </ul>
