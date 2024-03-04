@@ -229,6 +229,9 @@ function Navbar() {
                     aria-labelledby="dropdownDividerButton"
                   >
                     <li>
+                      <div className="block px-4 py-2">Olá, {user.nome}</div>
+                    </li>
+                    <li className="pt-2 border-t">
                       <NavLink
                         to={`users/${user.id}`}
                         className="block px-4 py-2 hover:bg-gray-100"
@@ -240,7 +243,7 @@ function Navbar() {
                     </li>
                     <li>
                       <NavLink
-                        to={"/settings"}
+                        to={"/conta"}
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
                         Configurações
