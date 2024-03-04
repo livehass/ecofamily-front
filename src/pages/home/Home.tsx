@@ -1,7 +1,16 @@
+import { useContext, useEffect } from "react";
 import Products from "../../components/lists/Products";
 import { Link, Element } from "react-scroll";
+import { AuthContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user.tipo === 0) navigate(`/lojas/${user.id}`);
+  }, [user]);
+
   return (
     <>
       <Element name="home">

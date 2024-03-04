@@ -1,10 +1,13 @@
 import { Form, redirect, useNavigation } from "react-router-dom";
 import User from "../../model/User";
 import { createUser } from "../../service/Service";
+import { useState } from "react";
 
 export async function createNewUser({ request }) {
   const formData = await request.formData();
   const user = Object.fromEntries(formData);
+  user.tipo = parseInt(user.tipo);
+  if (user.tipo === 0) user.sobrenome = "";
   if (user.passwordConfirm === user.senha && user.senha.length >= 8) {
     delete user.passwordConfirm;
     try {
@@ -23,6 +26,7 @@ export async function createNewUser({ request }) {
 }
 
 function Register() {
+  const [userType, setUserType] = useState(1);
   const navigation = useNavigation();
   return (
     <>
@@ -37,17 +41,35 @@ function Register() {
           method="post"
         >
           <h2 className="text-slate-900 text-5xl">Cadastrar</h2>
+          <div className="w-full">
+            <label htmlFor="tipo">Tipo de usuário</label>
+            <select
+              id="tipo"
+              name="tipo"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={1}
+              onChange={(e) => {
+                setUserType(parseInt(e.target.value));
+              }}
+            >
+              <option value="0">Vendedor</option>
+              <option value="1">Comprador</option>
+            </select>
+          </div>
           <div className="flex flex-col w-full">
-            <label htmlFor="nome">Nome</label>
+            <label htmlFor="nome">
+              {userType === 0 ? "Nome da loja" : "Nome"}
+            </label>
             <input
               type="text"
               id="nome"
               name="nome"
               placeholder="Nome"
               className="border-2 border-slate-700 rounded p-2"
+              required
             />
           </div>
-          <div className="flex flex-col w-full">
+          <div className={`flex flex-col w-full ${userType === 0 && "hidden"}`}>
             <label htmlFor="email">Sobrenome</label>
             <input
               type="text"
@@ -55,6 +77,7 @@ function Register() {
               name="sobrenome"
               placeholder="Sobrenome"
               className="border-2 border-slate-700 rounded p-2"
+              required={userType === 1}
             />
           </div>
           <div className="flex flex-col w-full">
@@ -94,16 +117,6 @@ function Register() {
               id="passwordConfirm"
               name="passwordConfirm"
               placeholder="Confirmar Senha"
-              className="border-2 border-slate-700 rounded p-2"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="tipo">Tipo de Usuario</label>
-            <input
-              type="tipo"
-              id="tipo"
-              name="tipo"
-              placeholder="Tipo"
               className="border-2 border-slate-700 rounded p-2"
             />
           </div>

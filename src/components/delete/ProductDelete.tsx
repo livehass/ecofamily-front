@@ -16,5 +16,5 @@ export default async function productDelete({ params }) {
       Authorization: token,
     },
   });
-  return redirect("/produtos");
+  return redirect("/");
 }

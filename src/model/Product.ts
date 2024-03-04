@@ -9,5 +9,6 @@ export default interface Product {
   quantidade: number;
   foto: string;
   categoria: Category;
+  data: string;
   usuario: User;
 }

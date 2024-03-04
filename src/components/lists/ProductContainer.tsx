@@ -1,4 +1,10 @@
-import { Form, redirect, useLoaderData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  Link,
+  redirect,
+  useLoaderData,
+  useNavigation,
+} from "react-router-dom";
 import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { find, update } from "../../service/Service";
@@ -18,10 +24,10 @@ export async function singleProductAction({ request, params }) {
   const product = {
     ...data,
     categoria: { id: data.categoria },
-    usuario: { id: 1 },
+    usuario: { id: data.usuario },
   } as Product;
   product.id = params.id;
-  console.log(data.usuario);
+  console.log(product);
   await update("/produtos", product);
   return redirect("/");
 }
@@ -35,7 +41,7 @@ export default function ProductContainer() {
   };
   if (product.foto === null) product.foto = "";
 
-  if (user.tipo === 1 || user.token === "")
+  if (user.id != product.usuario.id || user.tipo === 1)
     return (
       <div className="bg-gray-100 pb-8 pt-40 min-h-screen">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,13 +149,16 @@ export default function ProductContainer() {
               <div className="mb-4">
                 <span className="font-bold text-gray-700">Loja:</span>
                 <div className="flex items-center mt-2">
-                  {product.usuario.nome}
+                  <Link
+                    className="font-bold hover:underline"
+                    to={`/lojas/${product.usuario.id}`}
+                  >
+                    {product.usuario.nome}
+                  </Link>
                 </div>
               </div>
               <div>
-                <span className="font-bold text-gray-700">
-                  Product Description:
-                </span>
+                <span className="font-bold text-gray-700">Descrição:</span>
                 <p className="text-gray-600 text-sm mt-2">
                   {product.descricao}
                 </p>
@@ -162,13 +171,11 @@ export default function ProductContainer() {
 
   return (
     <>
-      <div className="w-full py-20">
-        <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
-          Explorar produtos
-        </h2>
+      <div className="pt-52 min-h-screen">
+        <h2 className="mb-10 text-center text-2xl font-bold">Editar produto</h2>
         <div className="flex flex-col items-center justify-center">
           <Form
-            className="w-full flex flex-col items-center justify-center"
+            className="w-full flex flex-col items-center justify-center gap-4"
             method="put"
           >
             <input
@@ -217,25 +224,27 @@ export default function ProductContainer() {
             <input
               type="number"
               value={product.usuario.id}
-              disabled
               className="hidden"
               name="usuario"
+              id="usuario"
             />
 
-            <select
-              id="categoria"
-              name="categoria"
-              defaultValue={product.categoria.id}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            >
-              {categories.map((category: Category) => {
-                return (
-                  <option key={category.id} value={category.id}>
-                    {category.descricao}
-                  </option>
-                );
-              })}
-            </select>
+            <div className="min-w-64">
+              <select
+                id="categoria"
+                name="categoria"
+                defaultValue={product.categoria.id}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                {categories.map((category: Category) => {
+                  return (
+                    <option key={category.id} value={category.id}>
+                      {category.descricao}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             <button
               type="submit"
               className="mt-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"

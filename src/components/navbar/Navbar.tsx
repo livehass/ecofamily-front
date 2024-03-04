@@ -233,7 +233,11 @@ function Navbar() {
                     </li>
                     <li className="pt-2 border-t">
                       <NavLink
-                        to={`users/${user.id}`}
+                        to={
+                          user.tipo === 1
+                            ? "/historico-compras"
+                            : `lojas/${user.id}`
+                        }
                         className="block px-4 py-2 hover:bg-gray-100"
                       >
                         {user.tipo === 1
@@ -241,6 +245,26 @@ function Navbar() {
                           : "Minha loja"}
                       </NavLink>
                     </li>
+                    {user.tipo === 0 && (
+                      <>
+                        <li>
+                          <NavLink
+                            to={"/novo-produto"}
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Novo produto
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            to={"/nova-categoria"}
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Nova categoria
+                          </NavLink>
+                        </li>
+                      </>
+                    )}
                     <li>
                       <NavLink
                         to={"/conta"}

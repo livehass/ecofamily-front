@@ -1,9 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/UserContext";
 import CheckoutProduct from "../../components/cards/product/CheckoutProduct";
+import Product from "../../model/Product";
+import { comprar, find } from "../../service/Service";
+import Transaction from "../../model/Transaction";
+import User from "../../model/User";
+import { useNavigate } from "react-router-dom";
 
 export default function Comprar() {
-  const { cartProducts } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { user, cartProducts, setCartProducts } = useContext(AuthContext);
   const [total, setTotal] = useState(
     cartProducts.reduce((acc, product) => {
       acc += parseFloat(product.preco);
@@ -12,6 +18,7 @@ export default function Comprar() {
   );
 
   useEffect(() => {
+    if (cartProducts.length === 0) navigate("/");
     setTotal(
       cartProducts.reduce((acc, product) => {
         acc += parseFloat(product.preco) * product.quantidade;
@@ -19,6 +26,28 @@ export default function Comprar() {
       }, 0)
     );
   }, [cartProducts]);
+
+  async function pagar() {
+    cartProducts.map(async (product) => {
+      const transactionProduct = (await find(
+        `/produtos/${product.id}`
+      )) as unknown as Product;
+      const comprador = { id: user.id } as User;
+      const transaction: Transaction = {
+        comprador,
+        produto: transactionProduct,
+        quantidade: product.quantidade,
+      };
+      try {
+        comprar(transaction);
+        setCartProducts([]);
+        localStorage.setItem("cartProducts", JSON.stringify([]));
+      } catch (error) {
+        alert("erro");
+        console.log(error);
+      }
+    });
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 pt-52">
@@ -47,7 +76,10 @@ export default function Comprar() {
               <p className="text-sm text-gray-700">+ Impostos</p>
             </div>
           </div>
-          <button className="mt-6 w-full rounded-md bg-green-600 py-1.5 font-medium text-blue-50 hover:bg-green-700">
+          <button
+            onClick={pagar}
+            className="mt-6 w-full rounded-md bg-green-600 py-1.5 font-medium text-blue-50 hover:bg-green-700"
+          >
             Pagar
           </button>
         </div>

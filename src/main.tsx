@@ -30,6 +30,13 @@ import categoryDelete from "./components/delete/CategoryDelete.tsx";
 import productDelete from "./components/delete/ProductDelete.tsx";
 import Comprar from "./pages/comprar/Comprar.tsx";
 import Settings from "./pages/settings/Settings.tsx";
+import TransactionHistory, {
+  transactionLoader,
+} from "./pages/history/TransactionHistory.tsx";
+import NovoProduto, {
+  novoProdutoLoader,
+} from "./pages/novoProduto/NovoProduto.tsx";
+import Loja, { lojaLoader } from "./pages/loja/Loja.tsx";
 
 const router = createBrowserRouter([
   {
@@ -55,12 +62,6 @@ const router = createBrowserRouter([
         action: createNewUser,
       },
       {
-        path: "/categorias",
-        element: <Categories />,
-        loader: categoryLoader,
-        action: categoryAction,
-      },
-      {
         path: "/categorias/:id",
         element: <CategoryContainer />,
         loader: singularCategoryLoader,
@@ -69,11 +70,6 @@ const router = createBrowserRouter([
       {
         path: "categorias/:id/delete",
         action: categoryDelete,
-      },
-      {
-        path: "/produtos",
-        element: <Products />,
-        action: productAction,
       },
       {
         path: "/produtos/:id",
@@ -91,7 +87,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/conta",
-        element: <Settings />
+        element: <Settings />,
+      },
+      {
+        path: "/historico-compras",
+        element: <TransactionHistory />,
+        loader: transactionLoader,
+      },
+      {
+        path: "/novo-produto",
+        element: <NovoProduto />,
+        loader: novoProdutoLoader,
+        action: productAction,
+      },
+      {
+        path: "/lojas/:id",
+        element: <Loja />,
+        loader: lojaLoader,
       },
     ],
   },
