@@ -5,7 +5,7 @@ import UserLogin from "../model/UserLogin";
 // import Category from "../model/Category";
 // import Product from "../model/Product";
 
-axios.defaults.baseURL = "https://ecofamily.onrender.com";
+axios.defaults.baseURL = "http://localhost:8080";
 
 // Post user
 export async function createUser(url: string, data: User) {

@@ -33,6 +33,13 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   };
   const [favProducts, setFavProducts] = useState<Product[]>(localFavProducts);
 
+  const localCartProducts: () => Product[] = () => {
+    return JSON.parse(
+      localStorage.getItem("cartProducts") || JSON.stringify([])
+    ) as Product[];
+  };
+  const [cartProducts, setCartProducts] = useState<Product[]>(localCartProducts);
+
   async function handleLogin(userLogin: UserLogin) {
     setIsLoading(true);
     try {
@@ -59,7 +66,16 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoading, handleLogin, handleLogout, favProducts, setFavProducts }}
+      value={{
+        user,
+        isLoading,
+        handleLogin,
+        handleLogout,
+        favProducts,
+        setFavProducts,
+        cartProducts,
+        setCartProducts,
+      }}
     >
       {children}
     </AuthContext.Provider>

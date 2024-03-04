@@ -8,4 +8,6 @@ export default interface AuthContextProps {
   isLoading: boolean;
   favProducts: Product[];
   setFavProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  cartProducts: Product[];
+  setCartProducts: React.Dispatch<React.SetStateAction<Product[]>>;
 }

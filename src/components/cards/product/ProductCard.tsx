@@ -3,6 +3,7 @@ import Category from "../../../model/Category";
 import Product from "../../../model/Product";
 import { useContext } from "react";
 import { AuthContext } from "../../../context/UserContext";
+import { sortBy } from "sort-by-typescript";
 
 export default function ProductCard({
   product,
@@ -10,7 +11,8 @@ export default function ProductCard({
   category: Category;
   product: Product;
 }) {
-  const { favProducts, setFavProducts } = useContext(AuthContext);
+  const { favProducts, setFavProducts, cartProducts, setCartProducts } =
+    useContext(AuthContext);
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <Link to={`/produtos/${product.id}`}>
@@ -77,16 +79,32 @@ export default function ProductCard({
             </button>
             <button
               onClick={() => {
-                document
-                  .getElementById("cart-icon")
-                  ?.classList.add("animate-custom-ping");
-                setTimeout(
-                  () =>
-                    document
-                      .getElementById("cart-icon")
-                      ?.classList.remove("animate-custom-ping"),
-                  600
-                );
+                if (
+                  cartProducts.filter(
+                    (cartProduct) => cartProduct.id === product.id
+                  ).length === 0
+                ) {
+                  document
+                    .getElementById("cart-icon")
+                    ?.classList.add("animate-custom-ping");
+                  setTimeout(
+                    () =>
+                      document
+                        .getElementById("cart-icon")
+                        ?.classList.remove("animate-custom-ping"),
+                    600
+                  );
+                  const cartProduct = product;
+                  cartProduct.quantidade = 1;
+                  const newCartProducts = [...cartProducts, cartProduct].sort(
+                    sortBy("nome")
+                  );
+                  setCartProducts(newCartProducts);
+                  localStorage.setItem(
+                    "cartProducts",
+                    JSON.stringify(newCartProducts)
+                  );
+                }
               }}
               className="cursor-pointer hover:bg-gray-200 rounded-e-md transition-all p-2"
             >

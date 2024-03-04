@@ -4,6 +4,7 @@ import Category from "../../model/Category";
 import { find, update } from "../../service/Service";
 import { useContext } from "react";
 import { AuthContext } from "../../context/UserContext";
+import { sortBy } from "sort-by-typescript";
 
 export async function loader({ params }) {
   const product = await find(`/produtos/${params.id}`);
@@ -26,14 +27,15 @@ export async function singleProductAction({ request, params }) {
 }
 
 export default function ProductContainer() {
-  const { user, favProducts, setFavProducts } = useContext(AuthContext);
+  const { user, favProducts, setFavProducts, cartProducts, setCartProducts } =
+    useContext(AuthContext);
   const { product, categories } = useLoaderData() as {
     product: Product;
     categories: Category[];
   };
   if (product.foto === null) product.foto = "";
 
-  if (user.tipo === 1)
+  if (user.tipo === 1 || user.token === "")
     return (
       <div className="bg-gray-100 pb-8 pt-40 min-h-screen">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,7 +54,38 @@ export default function ProductContainer() {
               </div>
               <div className="flex -mx-2 mb-4">
                 <div className="w-1/2 px-2">
-                  <button className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                  <button
+                    onClick={() => {
+                      if (
+                        cartProducts.filter(
+                          (cartProduct) => cartProduct.id === product.id
+                        ).length === 0
+                      ) {
+                        document
+                          .getElementById("cart-icon")
+                          ?.classList.add("animate-custom-ping");
+                        setTimeout(
+                          () =>
+                            document
+                              .getElementById("cart-icon")
+                              ?.classList.remove("animate-custom-ping"),
+                          600
+                        );
+                        const cartProduct = product;
+                        cartProduct.quantidade = 1;
+                        const newCartProducts = [
+                          ...cartProducts,
+                          cartProduct,
+                        ].sort(sortBy("nome"));
+                        setCartProducts(newCartProducts);
+                        localStorage.setItem(
+                          "cartProducts",
+                          JSON.stringify(newCartProducts)
+                        );
+                      }
+                    }}
+                    className="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                  >
                     Adicionar ao carrinho
                   </button>
                 </div>

@@ -28,6 +28,7 @@ import ProductContainer from "./components/lists/ProductContainer.tsx";
 import CategoryContainer from "./components/lists/CategoryContainer.tsx";
 import categoryDelete from "./components/delete/CategoryDelete.tsx";
 import productDelete from "./components/delete/ProductDelete.tsx";
+import Comprar from "./pages/comprar/Comprar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "produtos/:id/delete",
         action: productDelete,
+      },
+      {
+        path: "/comprar",
+        element: <Comprar />
       },
     ],
   },

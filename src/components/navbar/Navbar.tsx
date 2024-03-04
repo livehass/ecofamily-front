@@ -4,9 +4,11 @@ import { Link as ScrollLink } from "react-scroll";
 import { AuthContext } from "../../context/UserContext";
 import useOutsideClick from "../../hooks/useClickOutside";
 import FavoriteProducts from "../lists/FavoriteProducts";
+import CartProducts from "../lists/CartProducts";
 
 function Navbar() {
-  const { user, handleLogout, favProducts } = useContext(AuthContext);
+  const { user, handleLogout, favProducts, cartProducts } =
+    useContext(AuthContext);
   const token = user.token;
 
   const [userDropdown, setUserDropdown] = useState(false);
@@ -146,10 +148,10 @@ function Navbar() {
               <div
                 className={`z-10 ${
                   cartDropdown ? "" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[10.2rem]`}
+                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[9.4rem]`}
               >
                 <svg
-                  className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
+                  className="hidden md:block absolute text-white h-4 right-[8.3rem] -top-4 rotate-180 drop-shadow-2xl"
                   x="0px"
                   y="0px"
                   viewBox="0 0 255 255"
@@ -168,7 +170,18 @@ function Navbar() {
                   <li>
                     <div className="block text-center px-4 py-2">Carrinho</div>
                   </li>
+                  <li>
+                    <CartProducts />
+                  </li>
                 </ul>
+                <Link
+                  to="/comprar"
+                  className={`${
+                    cartProducts.length < 1 && "hidden"
+                  } block bg-green-600 text-center text-white font-bold drop-shadow-lg min-full text-xs p-1 rounded-b-md hover:bg-green-700`}
+                >
+                  Comprar
+                </Link>
               </div>
             </li>
             <li
@@ -196,7 +209,7 @@ function Navbar() {
                   id="dropdownDivider"
                   className={`z-10 ${
                     userDropdown ? "" : "hidden"
-                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.5rem]`}
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.7rem]`}
                 >
                   <svg
                     className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
@@ -288,97 +301,6 @@ function Navbar() {
               )}
             </li>
           </ul>
-
-          {/* <div className="flex gap-4">
-            <div>
-              <NavLink
-                to="/"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Home
-              </NavLink>
-            </div>
-            <div>
-              <NavLink
-                to="/produtos"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Produtos
-              </NavLink>
-            </div>
-            <div>
-              <NavLink
-                to="/categorias"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Categorias
-              </NavLink>
-            </div>
-            <div>
-              <NavLink
-                to="/sobre"
-                className={({ isActive, isPending }) =>
-                  isActive
-                    ? "underline"
-                    : isPending
-                    ? "animate-pulse"
-                    : "hover:underline"
-                }
-              >
-                Sobre Nós
-              </NavLink>
-            </div>
-            <div>
-              {token === "" ? (
-                <NavLink
-                  to="/login"
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? "underline"
-                      : isPending
-                      ? "animate-pulse"
-                      : "hover:underline"
-                  }
-                >
-                  Entrar
-                </NavLink>
-              ) : (
-                <NavLink
-                  to="/login"
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? "underline"
-                      : isPending
-                      ? "animate-pulse"
-                      : "hover:underline"
-                  }
-                  onClick={handleLogout}
-                >
-                  Sair
-                </NavLink>
-              )}
-            </div>
-
-            <div className="hover:underline">Carrinho (5)</div>
-          </div> */}
         </div>
       </div>
     </>
