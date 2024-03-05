@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import Category from "../../model/Category";
 import ProductCard from "../cards/product/ProductCard";
 import Product from "../../model/Product";
-import { ScrollLink, animateScroll } from "react-scroll";
+import { animateScroll } from "react-scroll";
 import { useLocation } from "react-router-dom";
 
 export function Items({ currentItems }: { currentItems: Product[] }) {

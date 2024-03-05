@@ -6,6 +6,7 @@ import User from "../../model/User";
 import Category from "../../model/Category";
 import PaginatedItems from "../../components/pagination/PaginatedItems";
 import { AuthContext } from "../../context/UserContext";
+import { sortBy } from "sort-by-typescript";
 
 export async function lojaLoader({ params }) {
   if (
@@ -31,7 +32,7 @@ export default function Products() {
     storeUser: User;
     categories: Category[];
   };
-  const products = storeUser.produtos;
+  const products = storeUser.produtos.sort(sortBy("nome"));
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [categoryClicked, setCategoryClicked] = useState(0);
@@ -64,11 +65,11 @@ export default function Products() {
         <div className="w-full px-4 flex flex-wrap items-center gap-2">
           <button
             onClick={() => {
-              setFilteredProducts(products);
+              setFilteredProducts(products.sort(sortBy("nome")));
               setCategoryClicked(0);
             }}
             className={`${
-              filteredProducts == products ? "bg-gray-400" : "hover:bg-gray-400"
+              categoryClicked === 0 ? "bg-gray-400" : "hover:bg-gray-400"
             } bg-gray-300 py-1 px-3 rounded-md `}
           >
             Tudo
@@ -84,9 +85,9 @@ export default function Products() {
                 } bg-gray-300 py-1 px-3 rounded-md `}
                 onClick={() => {
                   setFilteredProducts(
-                    products.filter(
-                      (product) => product.categoria.id === category.id
-                    )
+                    products
+                      .filter((product) => product.categoria.id === category.id)
+                      .sort(sortBy("nome"))
                   );
                   setCategoryClicked(category.id);
                 }}

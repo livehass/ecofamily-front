@@ -5,6 +5,7 @@ import Category from "../../model/Category";
 import { findProducts } from "../../service/Service";
 import { useState } from "react";
 import PaginatedItems from "../pagination/PaginatedItems";
+import { sortBy } from "sort-by-typescript";
 
 export async function loader() {
   const { products, categories } = await findProducts();
@@ -17,7 +18,9 @@ export default function Products() {
   };
 
   const [filteredProducts, setFilteredProducts] = useState(
-    products.filter((product) => product.usuario.tipo !== 1)
+    products
+      .filter((product) => product.usuario.tipo !== 1)
+      .sort(sortBy("nome"))
   );
   const [categoryClicked, setCategoryClicked] = useState(0);
 
@@ -33,7 +36,9 @@ export default function Products() {
           <button
             onClick={() => {
               setFilteredProducts(
-                products.filter((product) => product.usuario.tipo !== 1)
+                products
+                  .filter((product) => product.usuario.tipo !== 1)
+                  .sort(sortBy("nome"))
               );
               setCategoryClicked(0);
             }}
@@ -54,11 +59,13 @@ export default function Products() {
                 } bg-gray-300 py-1 px-3 rounded-md `}
                 onClick={() => {
                   setFilteredProducts(
-                    products.filter(
-                      (product) =>
-                        product.categoria.id === category.id &&
-                        product.usuario.tipo != 1
-                    )
+                    products
+                      .filter(
+                        (product) =>
+                          product.categoria.id === category.id &&
+                          product.usuario.tipo != 1
+                      )
+                      .sort(sortBy("nome"))
                   );
                   setCategoryClicked(category.id);
                 }}
