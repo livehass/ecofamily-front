@@ -4,8 +4,6 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./pages/root/Root.tsx";
 import Home from "./pages/home/Home.tsx";
-import Contact from "./pages/contact/Contact.tsx";
-import AboutUs from "./pages/about/About.tsx";
 import Login from "./pages/login/Login.tsx";
 import Register, { createNewUser } from "./pages/register/Register.tsx";
 import AuthProvider from "./components/authProvider/AuthProvider.tsx";
@@ -43,14 +41,6 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       { index: true, element: <Home />, loader: productLoader },
-      {
-        path: "/contato",
-        element: <Contact />,
-      },
-      {
-        path: "/sobre",
-        element: <AboutUs />,
-      },
       {
         path: "/login",
         element: <Login />,
