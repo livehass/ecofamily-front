@@ -3,7 +3,8 @@ import ReactPaginate from "react-paginate";
 import Category from "../../model/Category";
 import ProductCard from "../cards/product/ProductCard";
 import Product from "../../model/Product";
-import { ScrollLink } from "react-scroll";
+import { ScrollLink, animateScroll } from "react-scroll";
+import { useLocation } from "react-router-dom";
 
 export function Items({ currentItems }: { currentItems: Product[] }) {
   return (
@@ -24,6 +25,7 @@ export default function PaginatedItems({
   items: Product[];
   category?: Category;
 }) {
+  const location = useLocation();
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -51,8 +53,12 @@ export default function PaginatedItems({
         <Items currentItems={currentItems} />
       </div>
       <ReactPaginate
-        className="w-full *:bg-white *:drop-shadow md:row-start-2 flex items-baseline justify-center gap-2 *:px-2 *:border *:rounded hover:*:bg-gray-100"
-        onClick={() => document.getElementById("btn-explorar").click()}
+        className="w-full md:row-start-2 flex items-baseline justify-center gap-2"
+        onClick={() => {
+          if (location.pathname == "/")
+            document.getElementById("btn-explorar").click();
+          else animateScroll.scrollToTop({ duration: 500 });
+        }}
         breakLabel="..."
         nextLabel="Próximo"
         onPageChange={handlePageClick}
@@ -60,6 +66,10 @@ export default function PaginatedItems({
         pageCount={pageCount}
         previousLabel="Anterior"
         renderOnZeroPageCount={null}
+        pageClassName="pages drop-shadow hover:bg-gray-100 rounded border px-2"
+        activeClassName="active"
+        nextClassName="bg-white drop-shadow hover:bg-gray-100 rounded border px-2"
+        previousClassName="bg-white drop-shadow hover:bg-gray-100 rounded border px-2"
       />
     </>
   );
