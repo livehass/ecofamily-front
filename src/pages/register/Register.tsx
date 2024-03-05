@@ -35,9 +35,9 @@ function Register() {
         (navigation.state === "submitting" && (
           <div className="text-4xl"> CARREGANM DPO</div>
         ))}
-      <div className="flex flex-col justify-center items-center h-screen font-bold bg-gray-100 pt-16">
+      <div className="min-h-screen flex flex-col justify-center items-center font-bold bg-gray-100 py-52">
         <Form
-          className="bg-white py-12 px-8 rounded-lg drop-shadow flex justify-center items-center flex-col w-1/2 gap-4"
+          className="bg-white py-12 px-8 rounded-lg drop-shadow flex justify-center items-center flex-col md:w-1/2 gap-4"
           method="post"
         >
           <h2 className="text-slate-900 text-5xl">Cadastrar</h2>

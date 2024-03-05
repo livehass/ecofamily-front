@@ -14,13 +14,13 @@ function Home() {
   return (
     <>
       <Element name="home">
-        <div id="hero" className="pt-28 flex justify-center min-h-screen">
-          <div className="container grid grid-cols-1 text-white">
+        <div id="hero" className="md:pt-28 flex justify-center min-h-screen">
+          <div className="container grid grid-cols-1 text-white bg-white/40 backdrop-blur-lg md:backdrop-blur-0 md:bg-transparent">
             <div className="flex flex-col gap-4 items-center justify-center py-4">
-              <h2 className="text-7xl font-bold text-gray-900 mt-56">
+              <h2 className="md:text-7xl text-4xl font-bold text-gray-900 mt-56">
                 Seja bem vindo!
               </h2>
-              <p className="text-2xl text-gray-900">
+              <p className="md:text-2xl text-gray-900">
                 Compre produtos de Pequenos Produtores
               </p>
 

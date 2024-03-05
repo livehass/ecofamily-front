@@ -14,7 +14,7 @@ export async function novoProdutoLoader() {
 export default function NovoProduto() {
   const categories = useLoaderData() as Category[];
   return (
-    <div className="pt-40 min-h-screen">
+    <div className="py-40 min-h-screen">
       <h2 className="mb-10 text-center text-2xl font-bold">Novo produto</h2>
       <ProductForm categories={categories} />
     </div>

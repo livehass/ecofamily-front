@@ -24,7 +24,7 @@ export default function Categories() {
 
   return (
     <>
-      <div className="w-full py-20">
+      <div className="w-full min-h-screen py-20">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Visualizar categorias
         </h2>

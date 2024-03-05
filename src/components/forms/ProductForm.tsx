@@ -44,7 +44,7 @@ export default function ProductForm({
           id="foto"
         />
       </div>
-      <div className="w-1/3 bg-white rounded-md px-4 py-8 flex flex-col gap-4 border drop-shadow-md">
+      <div className="md:w-1/3 bg-white rounded-md px-4 py-8 flex flex-col gap-4 border drop-shadow-md">
         <input
           className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-green-500 peer"
           placeholder="Nome"
