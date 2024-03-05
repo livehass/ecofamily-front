@@ -20,7 +20,8 @@ export default function Comprar() {
 
   useEffect(() => {
     if (cartProducts.length === 0 && user.token === "") navigate("/");
-    if (cartProducts.length === 0 && user.token !== "") navigate("/historico-compras");
+    if (cartProducts.length === 0 && user.token !== "")
+      navigate("/historico-compras");
     setTotal(
       cartProducts.reduce((acc, product) => {
         acc += parseFloat(product.preco) * product.quantidade;
@@ -81,7 +82,9 @@ export default function Comprar() {
           <div className="flex justify-between">
             <p className="text-lg font-bold">Total</p>
             <div className="">
-              <p className="mb-1 text-lg font-bold">{total + 4.99}</p>
+              <p className="mb-1 text-lg font-bold">
+                {(total + 4.99).toFixed(2).replace(".", ",")}
+              </p>
               <p className="text-sm text-gray-700">+ Impostos</p>
             </div>
           </div>

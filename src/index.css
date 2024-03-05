@@ -40,3 +40,11 @@
     margin: 0;
   }
 }
+
+.pages {
+  background-color: white;
+}
+
+.pages.active {
+  background-color: rgb(229 231 235);
+}
