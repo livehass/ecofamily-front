@@ -7,7 +7,7 @@ import Product from "../model/Product";
 // import Category from "../model/Category";
 // import Product from "../model/Product";
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 // Post user
 export async function createUser(url: string, data: User) {
