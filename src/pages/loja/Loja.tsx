@@ -1,20 +1,31 @@
-import { useLoaderData, useNavigation } from "react-router-dom";
-import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardContainer";
-import Product from "../../model/Product";
-import Category from "../../model/Category";
-import { findProducts } from "../../service/Service";
+import { redirect, useLoaderData, useNavigation } from "react-router-dom";
+import { find } from "../../service/Service";
 import { useState } from "react";
-import PaginatedItems from "../pagination/PaginatedItems";
+import ProductCard from "../../components/cards/product/ProductCard";
+import LoadingCategoryCardContainer from "../../components/cards/category/LoadingCategoryCardContainer";
+import User from "../../model/User";
+import Category from "../../model/Category";
+import PaginatedItems from "../../components/pagination/PaginatedItems";
 
-export async function loader() {
-  const { products, categories } = await findProducts();
-  return { products, categories };
+export async function lojaLoader({ params }) {
+  if (
+    sessionStorage.getItem("userLogin") !== null &&
+    JSON.parse(sessionStorage.getItem("userLogin") as string).tipo === 0 &&
+    JSON.parse(sessionStorage.getItem("userLogin") as string).id != params.id
+  )
+    return redirect("/");
+
+  const user = await find(`usuarios/${params.id}`);
+  const categories = await find("/categorias");
+
+  return { user, categories };
 }
 export default function Products() {
-  const { products, categories } = useLoaderData() as {
-    products: Product[];
+  const { user, categories } = useLoaderData() as {
+    user: User;
     categories: Category[];
   };
+  const products = user.produtos;
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [categoryClicked, setCategoryClicked] = useState(0);
@@ -24,8 +35,17 @@ export default function Products() {
   return (
     <>
       <div className="w-full min-h-screen py-20 bg-gray-50">
-        <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
-          Explorar produtos
+        <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12 flex items-center gap-4 mb-4">
+          <img
+            className="object-cover size-20 p-1 rounded-full ring-2 ring-emerald-300"
+            src={
+              user.foto == ""
+                ? "https://cdlresende.com.br/wp-content/uploads/2018/03/no-image-icon-4.png"
+                : user.foto
+            }
+            alt="Bordered avatar"
+          />
+          {user.nome}
         </h2>
         <div className="w-full px-4 flex flex-wrap items-center gap-2">
           <button
@@ -62,7 +82,7 @@ export default function Products() {
             );
           })}
         </div>
-        <div className="relative p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
+        <div className="p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
           {navigation.state === "loading" ? (
             <LoadingCategoryCardContainer />
           ) : filteredProducts.length === 0 ? (
@@ -72,9 +92,7 @@ export default function Products() {
               </h2>
             </>
           ) : (
-            <>
-              <PaginatedItems items={filteredProducts} itemsPerPage={6} />
-            </>
+            <PaginatedItems items={filteredProducts} itemsPerPage={6} />
           )}
         </div>
       </div>

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import ProductForm from "../forms/ProductForm";
+import CategoryForm from "../../forms/CategoryForm";
 
-export default function CreateProductButton({ categories, users }) {
+export default function CreateCategoryButton() {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <article className="bg-white border border-gray-300 border-l-8 border-l-fuchsia-600 rounded-lg shadow transition-all flex flex-col items-center justify-center">
+    <article className="bg-white border border-gray-300 border-l-8 border-l-green-600 rounded-lg shadow transition-all flex flex-col items-center justify-center">
       <button
         onClick={() => {
           if (isClicked) setIsClicked(false);
@@ -20,9 +20,9 @@ export default function CreateProductButton({ categories, users }) {
         />
       </button>
       {isClicked ? (
-        <ProductForm users={users} categories={categories} />
+        <CategoryForm />
       ) : (
-        <h3 className="font-bold transition-all">Novo produto</h3>
+        <h3 className="font-bold transition-all">Nova categoria</h3>
       )}
     </article>
   );

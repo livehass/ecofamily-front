@@ -2,14 +2,21 @@
 import axios from "axios";
 import User from "../model/User";
 import UserLogin from "../model/UserLogin";
+import Transaction from "../model/Transaction";
+import Product from "../model/Product";
 // import Category from "../model/Category";
 // import Product from "../model/Product";
 
-axios.defaults.baseURL = "https://ecofamily.onrender.com";
+axios.defaults.baseURL = "http://localhost:8080";
 
 // Post user
 export async function createUser(url: string, data: User) {
   const response = await axios.post(url, data);
+  return response.data;
+}
+
+export async function comprar(data: Transaction) {
+  const response = await axios.post("/comprar", data);
   return response.data;
 }
 
@@ -44,7 +51,6 @@ export async function login(
   setUser: React.Dispatch<React.SetStateAction<UserLogin>>
 ) {
   const response = await axios.post(url, data);
-  console.log(response);
   setUser(response.data);
   sessionStorage.setItem("userLogin", JSON.stringify(response.data));
   return response.data;
@@ -57,10 +63,21 @@ export async function find(url: string) {
 }
 
 export async function findProducts() {
-  const products = await find("/produtos");
+  const allProducts = await find("/produtos");
+
+  const products = allProducts.filter(
+    (product: Product) => product.usuario.id != 1
+  );
+
   const categories = await find("/categorias");
 
   return { products, categories };
+}
+
+export async function findCategory(url: string, header: object) {
+  const response = await axios.get(url, header);
+  console.log(response);
+  return response.data;
 }
 
 // Post
@@ -70,14 +87,9 @@ export async function create(url: string, data: object) {
 }
 
 // Put
-export const update = async (
-  url: string,
-  dados: object,
-  setDados: Function,
-  header: Object
-) => {
-  const resposta = await axios.put(url, dados, header);
-  setDados(resposta.data);
+export const update = async (url: string, dados: object) => {
+  const response = await axios.put(url, dados);
+  return response.data;
 };
 
 // Delete
