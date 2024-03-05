@@ -15,7 +15,7 @@ export default function Settings() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [changePicture, setChangePicture] = useState(false);
-  const [newUser, setNewUser] = useState<User>(user as User);
+  const [newUser, setNewUser] = useState<User>(user as unknow as User);
   const navigate = useNavigate();
 
   useEffect(() => {
