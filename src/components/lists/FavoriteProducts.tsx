@@ -23,7 +23,7 @@ export default function FavoriteProducts({
             <li key={product.id} className="flex py-6 px-4">
               <Link
                 to={`/produtos/${product.id}`}
-                className="size-20 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+                className="size-20 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 hidden md:block"
               >
                 <img
                   src={
