@@ -53,24 +53,31 @@ export default function CategoryContainer() {
     <>
       <div className="w-full py-20">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
-          Visualizar produtos
+          Atualizar categoria
         </h2>
         <div className="flex flex-col items-center justify-center">
           <Form
             className="w-full flex flex-col items-center justify-center"
             method="put"
           >
-            <input
-              className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-blue-500 peer"
-              placeholder="Descrição"
-              type="text"
-              name="descricao"
-              id="descricao"
-              defaultValue={category.descricao}
-              required
-            />
-            <label>Perecível</label>
-            <input type="checkbox" id="perecivel" name="perecivel" />
+            <div className="flex items-start flex-col gap-4">
+              <div className="flex gap-4 items-center">
+                <label htmlFor="descricao">Descrição</label>
+                <input
+                  className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-blue-500 peer"
+                  placeholder="Descrição"
+                  type="text"
+                  name="descricao"
+                  id="descricao"
+                  defaultValue={category.descricao}
+                  required
+                />
+              </div>
+              <div className="flex gap-4">
+                <label htmlFor="perecivel">Perecível</label>
+                <input type="checkbox" id="perecivel" name="perecivel" />
+              </div>
+            </div>
             <button
               type="submit"
               className="mt-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
@@ -79,7 +86,7 @@ export default function CategoryContainer() {
             </button>
           </Form>
           <Form action="delete" method="delete">
-          <button
+            <button
               type="submit"
               className="mt-6 text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
             >

@@ -46,7 +46,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     setIsLoading(true);
     try {
       const response = await login("usuarios/login", userLogin, setUser);
-      toasts(`Olá, ${response.data.nome}`, "success");
+      toasts(`Olá, ${response.nome}`, "success");
       setIsLoading(false);
     } catch (error) {
       console.log(error);

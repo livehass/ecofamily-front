@@ -62,68 +62,73 @@ function Navbar() {
           </div> */}
 
           <ul className="flex gap-4 items-center">
-            <li
-              onClick={() => {
-                setFavDropdown(true);
-              }}
-              id="favDropdown"
-              className="cursor-pointer hover:bg-gray-200 rounded-md transition-all p-2"
-            >
-              <div className="hover:bg-gray-200 rounded-md transition-all p-2">
-                <div className="h-7">
-                  <svg
-                    id="fav-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="100%"
-                    height="100%"
-                    fill="rgb(21 128 61)"
-                    viewBox="0 0 256 256"
-                  >
-                    <path d="M223,57a58.07,58.07,0,0,0-81.92-.1L128,69.05,114.91,56.86A58,58,0,0,0,33,139l89.35,90.66a8,8,0,0,0,11.4,0L223,139a58,58,0,0,0,0-82Zm-11.35,70.76L128,212.6,44.3,127.68a42,42,0,0,1,59.4-59.4l.2.2,18.65,17.35a8,8,0,0,0,10.9,0L152.1,68.48l.2-.2a42,42,0,1,1,59.36,59.44Z"></path>
-                  </svg>
-                </div>
-              </div>
-              <div
-                className={`z-10 ${
-                  favDropdown ? "" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[14.5rem]`}
+            {user.tipo !== 0 && (
+              <li
+                onClick={() => {
+                  setFavDropdown(true);
+                }}
+                id="favDropdown"
+                className="cursor-pointer hover:bg-gray-200 rounded-md transition-all p-2"
               >
-                <svg
-                  className="hidden md:block absolute text-white h-4 right-32 -top-4 rotate-180 drop-shadow-2xl"
-                  x="0px"
-                  y="0px"
-                  viewBox="0 0 255 255"
-                  xmlSpace="preserve"
+                <div className="hover:bg-gray-200 rounded-md transition-all p-2">
+                  <div className="h-7">
+                    <svg
+                      id="fav-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="100%"
+                      height="100%"
+                      fill="rgb(21 128 61)"
+                      viewBox="0 0 256 256"
+                    >
+                      <path d="M223,57a58.07,58.07,0,0,0-81.92-.1L128,69.05,114.91,56.86A58,58,0,0,0,33,139l89.35,90.66a8,8,0,0,0,11.4,0L223,139a58,58,0,0,0,0-82Zm-11.35,70.76L128,212.6,44.3,127.68a42,42,0,0,1,59.4-59.4l.2.2,18.65,17.35a8,8,0,0,0,10.9,0L152.1,68.48l.2-.2a42,42,0,1,1,59.36,59.44Z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className={`z-10 ${
+                    favDropdown ? "" : "hidden"
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[14.5rem]`}
                 >
-                  <polygon
-                    className="fill-gray-300"
-                    points="0,0 127.5,127.5 255,0"
-                  />
-                </svg>
-                <ul
-                  ref={ref}
-                  className="py-2 text-sm text-gray-700"
-                  aria-labelledby="dropdownDividerButton"
-                >
-                  <li>
-                    <div className="block text-center px-4 py-2">Favoritos</div>
-                  </li>
-                  <li>
-                    <FavoriteProducts isExpanded={isExpanded} />
-                  </li>
-                </ul>
-                {favProducts.length > 1 && (
-                  <button
-                    onClick={() =>
-                      isExpanded ? setIsExpanded(false) : setIsExpanded(true)
-                    }
-                    className="bg-green-600 text-white font-bold drop-shadow-lg w-full text-xs p-1 rounded-b-md hover:bg-green-700"
+                  <svg
+                    className="hidden md:block absolute text-white h-4 right-32 -top-4 rotate-180 drop-shadow-2xl"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 255 255"
+                    xmlSpace="preserve"
                   >
-                    {isExpanded ? "Recolher" : "Expandir"}
-                  </button>
-                )}
-              </div>
-            </li>
+                    <polygon
+                      className="fill-gray-300"
+                      points="0,0 127.5,127.5 255,0"
+                    />
+                  </svg>
+                  <ul
+                    ref={ref}
+                    className="py-2 text-sm text-gray-700"
+                    aria-labelledby="dropdownDividerButton"
+                  >
+                    <li>
+                      <div className="block text-center px-4 py-2">
+                        Favoritos
+                      </div>
+                    </li>
+                    <li>
+                      <FavoriteProducts isExpanded={isExpanded} />
+                    </li>
+                  </ul>
+                  {favProducts.length > 1 && (
+                    <button
+                      onClick={() =>
+                        isExpanded ? setIsExpanded(false) : setIsExpanded(true)
+                      }
+                      className="bg-green-600 text-white font-bold drop-shadow-lg w-full text-xs p-1 rounded-b-md hover:bg-green-700"
+                    >
+                      {isExpanded ? "Recolher" : "Expandir"}
+                    </button>
+                  )}
+                </div>
+              </li>
+            )}
+
             <li
               onClick={() => {
                 setCartDropdown(true);
@@ -133,16 +138,20 @@ function Navbar() {
             >
               <div className="hover:bg-gray-200 rounded-md transition-all p-2">
                 <div className="h-7">
-                  <svg
-                    id="cart-icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="100%"
-                    height="100%"
-                    fill="rgb(21 128 61)"
-                    viewBox="0 0 256 256"
-                  >
-                    <path d="M96,216a16,16,0,1,1-16-16A16,16,0,0,1,96,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,184,200ZM231.65,74.35l-28.53,92.71A23.89,23.89,0,0,1,180.18,184H84.07A24.11,24.11,0,0,1,61,166.59L24.82,40H8A8,8,0,0,1,8,24H24.82A16.08,16.08,0,0,1,40.21,35.6L48.32,64H224a8,8,0,0,1,7.65,10.35ZM213.17,80H52.89l23.49,82.2a8,8,0,0,0,7.69,5.8h96.11a8,8,0,0,0,7.65-5.65Z"></path>
-                  </svg>
+                  {user.tipo !== 0 ? (
+                    <svg
+                      id="cart-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="100%"
+                      height="100%"
+                      fill="rgb(21 128 61)"
+                      viewBox="0 0 256 256"
+                    >
+                      <path d="M96,216a16,16,0,1,1-16-16A16,16,0,0,1,96,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,184,200ZM231.65,74.35l-28.53,92.71A23.89,23.89,0,0,1,180.18,184H84.07A24.11,24.11,0,0,1,61,166.59L24.82,40H8A8,8,0,0,1,8,24H24.82A16.08,16.08,0,0,1,40.21,35.6L48.32,64H224a8,8,0,0,1,7.65,10.35ZM213.17,80H52.89l23.49,82.2a8,8,0,0,0,7.69,5.8h96.11a8,8,0,0,0,7.65-5.65Z"></path>
+                    </svg>
+                  ) : (
+                    <i className="fa-solid fa-plus px-1 text-green-700"></i>
+                  )}
                 </div>
               </div>
               <div
@@ -162,26 +171,59 @@ function Navbar() {
                     points="0,0 127.5,127.5 255,0"
                   />
                 </svg>
-                <ul
-                  ref={ref}
-                  className="py-2 text-sm text-gray-700"
-                  aria-labelledby="dropdownDividerButton"
-                >
-                  <li>
-                    <div className="block text-center px-4 py-2">Carrinho</div>
-                  </li>
-                  <li>
-                    <CartProducts />
-                  </li>
-                </ul>
-                <Link
-                  to="/comprar"
-                  className={`${
-                    cartProducts.length < 1 && "hidden"
-                  } block bg-green-600 text-center text-white font-bold drop-shadow-lg min-full text-xs p-1 rounded-b-md hover:bg-green-700`}
-                >
-                  Comprar
-                </Link>
+                {user.tipo !== 0 ? (
+                  <>
+                    {" "}
+                    <ul
+                      ref={ref}
+                      className="py-2 text-sm text-gray-700"
+                      aria-labelledby="dropdownDividerButton"
+                    >
+                      <li>
+                        <div className="block text-center px-4 py-2">
+                          Carrinho
+                        </div>
+                      </li>
+                      <li>
+                        <CartProducts />
+                      </li>
+                    </ul>
+                    <Link
+                      to="/comprar"
+                      className={`${
+                        cartProducts.length < 1 && "hidden"
+                      } block bg-green-600 text-center text-white font-bold drop-shadow-lg min-full text-xs p-1 rounded-b-md hover:bg-green-700`}
+                    >
+                      Comprar
+                    </Link>
+                  </>
+                ) : (
+                  <ul
+                    ref={ref}
+                    className="py-2 text-sm text-gray-700"
+                    aria-labelledby="dropdownDividerButton"
+                  >
+                    <li>
+                      <div className="block px-4 py-2 text-center">Novo</div>
+                    </li>
+                    <li className="pt-2 border-t">
+                      <NavLink
+                        to={"/novo-produto"}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Produto
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/categorias"}
+                        className="block px-4 py-2 hover:bg-gray-100"
+                      >
+                        Categorias
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
               </div>
             </li>
             <li
@@ -245,26 +287,6 @@ function Navbar() {
                           : "Minha loja"}
                       </NavLink>
                     </li>
-                    {user.tipo === 0 && (
-                      <>
-                        <li>
-                          <NavLink
-                            to={"/novo-produto"}
-                            className="block px-4 py-2 hover:bg-gray-100"
-                          >
-                            Novo produto
-                          </NavLink>
-                        </li>
-                        <li>
-                          <NavLink
-                            to={"/categorias"}
-                            className="block px-4 py-2 hover:bg-gray-100"
-                          >
-                            Categorias
-                          </NavLink>
-                        </li>
-                      </>
-                    )}
                     <li>
                       <NavLink
                         to={"/conta"}

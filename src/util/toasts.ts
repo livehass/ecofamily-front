@@ -1,11 +1,11 @@
 import { Bounce, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";;
+import "react-toastify/dist/ReactToastify.css";
 
 export function toasts(message: string, type: string) {
   switch (type) {
     case "success":
       toast.success(message, {
-        position: "bottom-right",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -19,7 +19,7 @@ export function toasts(message: string, type: string) {
 
     case "info":
       toast.info(message, {
-        position: "bottom-right",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -33,7 +33,7 @@ export function toasts(message: string, type: string) {
 
     case "error":
       toast.error(message, {
-        position: "bottom-right",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -47,7 +47,7 @@ export function toasts(message: string, type: string) {
 
     default:
       toast(message, {
-        position: "bottom-right",
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

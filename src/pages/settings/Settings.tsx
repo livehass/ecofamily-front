@@ -39,7 +39,10 @@ export default function Settings() {
     } catch (error) {
       if (error.toString().includes("403")) handleLogout();
       else {
-        toasts("Oops... Parece que algo deu errado, tente novamente mais tarde", "error");
+        toasts(
+          "Oops... Parece que algo deu errado, tente novamente mais tarde",
+          "error"
+        );
         console.log(error);
       }
       setIsLoading(false);
@@ -56,7 +59,11 @@ export default function Settings() {
       handleLogout();
     } catch (error) {
       if (error.toString().includes("403")) handleLogout();
-      else toasts("Oops... Parece que algo deu errado, tente novamente mais tarde", "error");
+      else
+        toasts(
+          "Oops... Parece que algo deu errado, tente novamente mais tarde",
+          "error"
+        );
     }
   }
 
@@ -71,15 +78,15 @@ export default function Settings() {
     <div className="pt-24 bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row">
       {isLoading ? (
         <MutatingDots
-        visible={true}
-        height="100"
-        width="100"
-        color="#4fa94d"
-        secondaryColor="#4fa94d"
-        radius="12.5"
-        ariaLabel="mutating-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
+          visible={true}
+          height="100"
+          width="100"
+          color="#4fa94d"
+          secondaryColor="#4fa94d"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
         />
       ) : (
         <>
@@ -146,7 +153,7 @@ export default function Settings() {
                         <button
                           type="button"
                           className="py-3.5 px-7 text-base font-medium text-emerald-900 focus:outline-none bg-white rounded-lg border border-emerald-200 hover:bg-emerald-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-emerald-200 "
-                          onClick={() => setNewUser({ ...newUser, foto: '' })}
+                          onClick={() => setNewUser({ ...newUser, foto: "" })}
                         >
                           Apagar foto
                         </button>
@@ -155,41 +162,41 @@ export default function Settings() {
                     <div className="items-center mt-8 sm:mt-14 text-[#202142]">
                       <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                         <div className="w-full flex items-center justify-between">
-                          <div>
-                              <label
-                                htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-emerald-900"
-                              >
-                                Nome
-                              </label>
-                              <input
-                                type="text"
-                                id="nome"
-                                name="nome"
-                                className="bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 "
-                                placeholder="Digite seu nome"
-                                value={newUser.nome}
-                                onChange={updateState}
-                                required
-                              />
+                          <div className={`${newUser.tipo === 0 && "w-full"}`}>
+                            <label
+                              htmlFor="name"
+                              className="block mb-2 text-sm font-medium text-emerald-900"
+                            >
+                              {newUser.tipo === 0 ? "Nome da loja" : "Nome"}
+                            </label>
+                            <input
+                              type="text"
+                              id="nome"
+                              name="nome"
+                              className="bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 "
+                              placeholder="Digite seu nome"
+                              value={newUser.nome}
+                              onChange={updateState}
+                              required
+                            />
                           </div>
-                          <div>
-                              <label
-                                htmlFor="name"
-                                className="block mb-2 text-sm font-medium text-emerald-900"
-                              >
-                                Sobrenome
-                              </label>
-                              <input
-                                type="text"
-                                id="sobrenome"
-                                name="sobrenome"
-                                className="bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 "
-                                placeholder="Digite seu sobrenome"
-                                value={newUser.sobrenome}
-                                onChange={updateState}
-                                required
-                              />
+                          <div className={`${newUser.tipo === 0 && "hidden"}`}>
+                            <label
+                              htmlFor="name"
+                              className="block mb-2 text-sm font-medium text-emerald-900"
+                            >
+                              Sobrenome
+                            </label>
+                            <input
+                              type="text"
+                              id="sobrenome"
+                              name="sobrenome"
+                              className="bg-emerald-50 border border-emerald-300 text-emerald-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5 "
+                              placeholder="Digite seu sobrenome"
+                              value={newUser.sobrenome}
+                              onChange={updateState}
+                              required
+                            />
                           </div>
                         </div>
                       </div>

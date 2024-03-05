@@ -3,8 +3,9 @@ import ReactPaginate from "react-paginate";
 import Category from "../../model/Category";
 import ProductCard from "../cards/product/ProductCard";
 import Product from "../../model/Product";
+import { ScrollLink } from "react-scroll";
 
-function Items({ currentItems }: { currentItems: Product[] }) {
+export function Items({ currentItems }: { currentItems: Product[] }) {
   return (
     <>
       {currentItems &&
@@ -46,9 +47,12 @@ export default function PaginatedItems({
 
   return (
     <>
-      <Items currentItems={currentItems} />
+      <div className="p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
+        <Items currentItems={currentItems} />
+      </div>
       <ReactPaginate
-        className="w-full md:place-self-center md:col-start-3 md:col-span-2 md:self-center *:bg-white *:drop-shadow md:row-start-2 flex items-baseline justify-center gap-2 *:px-2 *:border *:rounded hover:*:bg-gray-100"
+        className="w-full *:bg-white *:drop-shadow md:row-start-2 flex items-baseline justify-center gap-2 *:px-2 *:border *:rounded hover:*:bg-gray-100"
+        onClick={() => document.getElementById("btn-explorar").click()}
         breakLabel="..."
         nextLabel="Próximo"
         onPageChange={handlePageClick}
