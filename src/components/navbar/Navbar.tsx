@@ -31,7 +31,7 @@ function Navbar() {
         onClick={(event) => event.stopPropagation()}
         className="fixed w-full bg-white text-gray-800 flex justify-center py-4 drop-shadow-md z-50"
       >
-        <div className="container flex justify-between gap-64 text-lg items-center">
+        <div className="flex w-full justify-around  text-lg items-center">
           {location.pathname != "/" ? (
             <Link to="/" className="text-2xl font-bold text-green-800">
               <i className="fa-solid fa-leaf"></i> ecoFamily
@@ -61,7 +61,7 @@ function Navbar() {
             <i className="fa-solid fa-magnifying-glass text-green-700"></i>
           </div> */}
 
-          <ul className="flex gap-4 items-center">
+          <ul className="flex gap-4 items-center relative">
             {user.tipo !== 0 && (
               <li
                 onClick={() => {
@@ -87,7 +87,7 @@ function Navbar() {
                 <div
                   className={`z-10 ${
                     favDropdown ? "" : "hidden"
-                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[14.5rem]`}
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 absolute top-14 right-20 md:right-11`}
                 >
                   <svg
                     className="hidden md:block absolute text-white h-4 right-32 -top-4 rotate-180 drop-shadow-2xl"
@@ -157,7 +157,7 @@ function Navbar() {
               <div
                 className={`z-10 ${
                   cartDropdown ? "" : "hidden"
-                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 md:absolute md:top-[4.6rem] md:right-[9.4rem]`}
+                } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-72 absolute top-14 right-2 md:-right-9`}
               >
                 <svg
                   className="hidden md:block absolute text-white h-4 right-[8.3rem] -top-4 rotate-180 drop-shadow-2xl"
@@ -251,7 +251,7 @@ function Navbar() {
                   id="dropdownDivider"
                   className={`z-10 ${
                     userDropdown ? "" : "hidden"
-                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.7rem]`}
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 absolute top-14 right-0 md:-right-24`}
                 >
                   <svg
                     className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"
@@ -310,7 +310,7 @@ function Navbar() {
                   id="dropdownDivider"
                   className={`z-10 ${
                     userDropdown ? "" : "hidden"
-                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 md:absolute md:top-[4.6rem] md:right-[5.5rem]`}
+                  } bg-white divide-y divide-gray-100 rounded-b-md shadow w-full md:w-60 absolute top-14 right-0 md:-right-24`}
                 >
                   <svg
                     className="hidden md:block absolute text-white h-4 right-[7.3rem] -top-4 rotate-180 drop-shadow-2xl"

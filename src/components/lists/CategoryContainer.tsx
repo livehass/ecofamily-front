@@ -51,11 +51,11 @@ export default function CategoryContainer() {
 
   return (
     <>
-      <div className="w-full py-20">
+      <div className="w-full flex flex-col items-center min-h-screen bg-gray-100 py-20">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Atualizar categoria
         </h2>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center bg-white rounded-md px-8 py-4 drop-shadow-md md:min-w-1/2">
           <Form
             className="w-full flex flex-col items-center justify-center"
             method="put"

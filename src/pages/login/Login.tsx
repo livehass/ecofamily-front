@@ -31,9 +31,9 @@ function Login() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen font-bold bg-gray-100">
+      <div className="flex flex-col justify-center items-center min-h-screen py-52 font-bold bg-gray-100">
         <form
-          className="bg-white py-12 px-8 rounded-lg drop-shadow flex justify-center items-center flex-col w-1/4 gap-4"
+          className="bg-white py-12 px-8 rounded-lg drop-shadow flex justify-center items-center flex-col md:w-1/4 gap-4"
           onSubmit={login}
         >
           <h2 className="text-slate-900 text-5xl ">Entrar</h2>

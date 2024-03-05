@@ -30,7 +30,7 @@ export default function CategoryForm() {
       className="w-full flex flex-col items-center justify-center"
     >
       <input
-        className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-blue-500 peer"
+        className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-green-500 peer"
         placeholder="Nova categoria"
         type="text"
         name="descricao"
@@ -38,11 +38,13 @@ export default function CategoryForm() {
         required
         autoFocus
       />
-      <label>Perecível</label>
-      <input type="checkbox" id="perecivel" name="perecivel" />
+      <div className="flex items-center justify-start gap-4">
+        <label htmlFor="perecivel">Perecível</label>
+        <input type="checkbox" id="perecivel" name="perecivel" />
+      </div>
       <button
         type="submit"
-        className="mt-6 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        className="my-4 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Criar
       </button>

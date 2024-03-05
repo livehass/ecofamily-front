@@ -23,7 +23,7 @@ export default function TransactionHistory() {
   let products = useLoaderData() as Product[];
   products = products.sort(sortBy("data"));
   return (
-    <div className="min-h-screen bg-gray-100 pt-52 px-40">
+    <div className="min-h-screen bg-gray-100 py-52 px-40">
       <div className="relative overflow-x-auto rounded-md">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 border rounded-md">
           <thead className="text-xs text-gray-900 uppercase">
