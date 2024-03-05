@@ -34,7 +34,7 @@ export default function Settings() {
       });
       setIsLoading(false);
       setChangePicture(false);
-      handleLogin(newUser as UserLogin);
+      handleLogin(newUser as unknown as UserLogin);
     } catch (error) {
       if (error.toString().includes("403")) handleLogout();
       else {
