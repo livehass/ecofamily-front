@@ -15,7 +15,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link to={`/produtos/${product.id}`}>
         <img
           id="product-image"
-          className="w-full object-cover drop-shadow-md rounded-md mb-4"
+          className="w-full h-96 object-cover drop-shadow-md rounded-md mb-4"
           src={
             product.foto == ""
               ? "https://cdlresende.com.br/wp-content/uploads/2018/03/no-image-icon-4.png"
@@ -36,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
             R${product.preco}
           </span>
           <div className="flex items-center border rounded-md divide-x-2">
-            {user.tipo === 1 && (
+            {user.tipo !== 0 && (
               <>
                 <button
                   onClick={() => {

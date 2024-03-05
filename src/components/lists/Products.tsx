@@ -16,7 +16,9 @@ export default function Products() {
     categories: Category[];
   };
 
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(
+    products.filter((product) => product.usuario.tipo !== 1)
+  );
   const [categoryClicked, setCategoryClicked] = useState(0);
 
   const navigation = useNavigation();
@@ -30,11 +32,13 @@ export default function Products() {
         <div className="w-full px-4 flex flex-wrap items-center gap-2">
           <button
             onClick={() => {
-              setFilteredProducts(products);
+              setFilteredProducts(
+                products.filter((product) => product.usuario.tipo !== 1)
+              );
               setCategoryClicked(0);
             }}
             className={`${
-              filteredProducts == products ? "bg-gray-400" : "hover:bg-gray-400"
+              categoryClicked === 0 ? "bg-gray-400" : "hover:bg-gray-400"
             } bg-gray-300 py-1 px-3 rounded-md `}
           >
             Tudo
@@ -51,7 +55,9 @@ export default function Products() {
                 onClick={() => {
                   setFilteredProducts(
                     products.filter(
-                      (product) => product.categoria.id === category.id
+                      (product) =>
+                        product.categoria.id === category.id &&
+                        product.usuario.tipo != 1
                     )
                   );
                   setCategoryClicked(category.id);
@@ -62,19 +68,17 @@ export default function Products() {
             );
           })}
         </div>
-        <div className="relative p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
+        <div className="w-full">
           {navigation.state === "loading" ? (
             <LoadingCategoryCardContainer />
           ) : filteredProducts.length === 0 ? (
             <>
-              <h2 className="mt-4 text-2xl font-bold col-span-2">
+              <h2 className="mt-36 text-center text-2xl font-bold col-span-2">
                 Nenhum produto por enquanto...
               </h2>
             </>
           ) : (
-            <>
-              <PaginatedItems items={filteredProducts} itemsPerPage={6} />
-            </>
+            <PaginatedItems items={filteredProducts} itemsPerPage={18} />
           )}
         </div>
       </div>

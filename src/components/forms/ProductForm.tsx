@@ -45,7 +45,6 @@ export default function ProductForm({
         type="text"
         name="descricao"
         id="descricao"
-        required
       />
       <input
         className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 hover:drop-shadow-md transition-all focus-visible:outline-0 focus-visible:border-blue-500 peer"

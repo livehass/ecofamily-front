@@ -3,6 +3,7 @@ import User from "../../model/User";
 import UserLogin from "../../model/UserLogin";
 import { find } from "../../service/Service";
 import Product from "../../model/Product";
+import { sortBy } from "sort-by-typescript";
 
 export async function transactionLoader() {
   if (sessionStorage.getItem("userLogin") === null) return redirect("/login");
@@ -19,7 +20,8 @@ export async function transactionLoader() {
 }
 
 export default function TransactionHistory() {
-  const products = useLoaderData() as Product[];
+  let products = useLoaderData() as Product[];
+  products = products.sort(sortBy("data"));
   return (
     <div className="min-h-screen bg-gray-100 pt-52 px-40">
       <div className="relative overflow-x-auto rounded-md">

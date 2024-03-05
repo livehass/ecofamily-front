@@ -1,31 +1,37 @@
-import { redirect, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, redirect, useLoaderData, useNavigation } from "react-router-dom";
 import { find } from "../../service/Service";
-import { useState } from "react";
-import ProductCard from "../../components/cards/product/ProductCard";
+import { useContext, useState } from "react";
 import LoadingCategoryCardContainer from "../../components/cards/category/LoadingCategoryCardContainer";
 import User from "../../model/User";
 import Category from "../../model/Category";
 import PaginatedItems from "../../components/pagination/PaginatedItems";
+import { AuthContext } from "../../context/UserContext";
 
 export async function lojaLoader({ params }) {
   if (
-    sessionStorage.getItem("userLogin") !== null &&
-    JSON.parse(sessionStorage.getItem("userLogin") as string).tipo === 0 &&
-    JSON.parse(sessionStorage.getItem("userLogin") as string).id != params.id
+    (sessionStorage.getItem("userLogin") !== null &&
+      JSON.parse(sessionStorage.getItem("userLogin") as string).tipo === 0 &&
+      JSON.parse(sessionStorage.getItem("userLogin") as string).id !=
+        params.id) ||
+    (sessionStorage.getItem("userLogin") !== null &&
+      JSON.parse(sessionStorage.getItem("userLogin") as string).tipo === 1 &&
+      JSON.parse(sessionStorage.getItem("userLogin") as string).id == params.id)
   )
     return redirect("/");
 
-  const user = await find(`usuarios/${params.id}`);
+  const storeUser = await find(`usuarios/${params.id}`);
   const categories = await find("/categorias");
 
-  return { user, categories };
+  return { storeUser, categories };
 }
 export default function Products() {
-  const { user, categories } = useLoaderData() as {
-    user: User;
+  const { user } = useContext(AuthContext);
+
+  const { storeUser, categories } = useLoaderData() as {
+    storeUser: User;
     categories: Category[];
   };
-  const products = user.produtos;
+  const products = storeUser.produtos;
 
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [categoryClicked, setCategoryClicked] = useState(0);
@@ -39,13 +45,21 @@ export default function Products() {
           <img
             className="object-cover size-20 p-1 rounded-full ring-2 ring-emerald-300"
             src={
-              user.foto == ""
+              storeUser.foto == ""
                 ? "https://cdlresende.com.br/wp-content/uploads/2018/03/no-image-icon-4.png"
-                : user.foto
+                : storeUser.foto
             }
             alt="Bordered avatar"
           />
-          {user.nome}
+          {storeUser.nome}{" "}
+          {user.id === storeUser.id && (
+            <Link
+              to="/novo-produto"
+              className="text-sm font-bold rounded-md bg-green-600 py-2 px-2 text-blue-50 hover:bg-green-700"
+            >
+              Novo produto
+            </Link>
+          )}
         </h2>
         <div className="w-full px-4 flex flex-wrap items-center gap-2">
           <button
@@ -82,17 +96,17 @@ export default function Products() {
             );
           })}
         </div>
-        <div className="p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
+        <div className="w-full">
           {navigation.state === "loading" ? (
             <LoadingCategoryCardContainer />
           ) : filteredProducts.length === 0 ? (
             <>
-              <h2 className="mt-4 text-2xl font-bold col-span-2">
+              <h2 className="mt-36 text-center text-2xl font-bold col-span-2">
                 Nenhum produto por enquanto...
               </h2>
             </>
           ) : (
-            <PaginatedItems items={filteredProducts} itemsPerPage={6} />
+            <PaginatedItems items={filteredProducts} itemsPerPage={18} />
           )}
         </div>
       </div>

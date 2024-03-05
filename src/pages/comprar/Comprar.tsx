@@ -6,6 +6,7 @@ import { comprar, find } from "../../service/Service";
 import Transaction from "../../model/Transaction";
 import User from "../../model/User";
 import { useNavigate } from "react-router-dom";
+import { toasts } from "../../util/toasts";
 
 export default function Comprar() {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ export default function Comprar() {
   );
 
   useEffect(() => {
-    if (cartProducts.length === 0) navigate("/");
+    if (cartProducts.length === 0 && user.token === "") navigate("/");
+    if (cartProducts.length === 0 && user.token !== "") navigate("/historico-compras");
     setTotal(
       cartProducts.reduce((acc, product) => {
         acc += parseFloat(product.preco) * product.quantidade;
@@ -28,25 +30,32 @@ export default function Comprar() {
   }, [cartProducts]);
 
   async function pagar() {
-    cartProducts.map(async (product) => {
-      const transactionProduct = (await find(
-        `/produtos/${product.id}`
-      )) as unknown as Product;
-      const comprador = { id: user.id } as User;
-      const transaction: Transaction = {
-        comprador,
-        produto: transactionProduct,
-        quantidade: product.quantidade,
-      };
-      try {
-        comprar(transaction);
-        setCartProducts([]);
-        localStorage.setItem("cartProducts", JSON.stringify([]));
-      } catch (error) {
-        alert("erro");
-        console.log(error);
-      }
-    });
+    if (user.token === "") {
+      navigate("/login");
+    } else {
+      cartProducts.map(async (product) => {
+        const transactionProduct = (await find(
+          `/produtos/${product.id}`
+        )) as unknown as Product;
+        const comprador = { id: user.id } as User;
+        const transaction: Transaction = {
+          comprador,
+          produto: transactionProduct,
+          quantidade: product.quantidade,
+        };
+        try {
+          comprar(transaction);
+          setCartProducts([]);
+          localStorage.setItem("cartProducts", JSON.stringify([]));
+        } catch (error) {
+          toasts(
+            "Oops, algo deu errado. Tente novamente mais tarde...",
+            "error"
+          );
+          console.log(error);
+        }
+      });
+    }
   }
 
   return (
