@@ -21,7 +21,7 @@ function Home() {
                 Seja bem vindo!
               </h2>
               <p className="md:text-2xl text-gray-900">
-                Compre produtos de Pequenos Produtores
+                Compre de Pequenos Produtores
               </p>
 
               <div className="flex justify-around gap-4">
