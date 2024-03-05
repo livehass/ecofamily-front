@@ -5,6 +5,7 @@ import User from "../../model/User";
 import UserLogin from "../../model/UserLogin";
 import { MutatingDots } from "react-loader-spinner";
 import ModalDelete from "../../components/modal/ModalDelete";
+import { toasts } from "../../util/toasts";
 import { destroy, updateUser } from "../../service/Service";
 
 export default function Settings() {
@@ -38,7 +39,7 @@ export default function Settings() {
     } catch (error) {
       if (error.toString().includes("403")) handleLogout();
       else {
-        alert("Oops... Something went wrong, try again later");
+        toasts("Oops... Parece que algo deu errado, tente novamente mais tarde", "error");
         console.log(error);
       }
       setIsLoading(false);
@@ -55,7 +56,7 @@ export default function Settings() {
       handleLogout();
     } catch (error) {
       if (error.toString().includes("403")) handleLogout();
-      else alert("Oops... Something went wrong, try again later", "error");
+      else toasts("Oops... Parece que algo deu errado, tente novamente mais tarde", "error");
     }
   }
 
