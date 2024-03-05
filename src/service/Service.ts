@@ -7,7 +7,7 @@ import Product from "../model/Product";
 // import Category from "../model/Category";
 // import Product from "../model/Product";
 
-axios.defaults.baseURL = "https://ecofamily.onrender.com";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 // Post user
 export async function createUser(url: string, data: User) {
