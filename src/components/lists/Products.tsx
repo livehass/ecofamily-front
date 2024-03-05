@@ -3,8 +3,8 @@ import LoadingCategoryCardContainer from "../cards/category/LoadingCategoryCardC
 import Product from "../../model/Product";
 import Category from "../../model/Category";
 import { findProducts } from "../../service/Service";
-import ProductCard from "../cards/product/ProductCard";
 import { useState } from "react";
+import PaginatedItems from "../pagination/PaginatedItems";
 
 export async function loader() {
   const { products, categories } = await findProducts();
@@ -23,7 +23,7 @@ export default function Products() {
 
   return (
     <>
-      <div className="w-full min-h-screen py-20">
+      <div className="w-full min-h-screen py-20 bg-gray-50">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12">
           Explorar produtos
         </h2>
@@ -62,25 +62,18 @@ export default function Products() {
             );
           })}
         </div>
-        <div className="p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
+        <div className="relative p-4 grid grid-cols-[repeat(auto-fill,_minmax(250px,1fr))] auto-rows-[minmax(250px,_1fr)] gap-6">
           {navigation.state === "loading" ? (
             <LoadingCategoryCardContainer />
           ) : filteredProducts.length === 0 ? (
             <>
-              <h2 className="mt-4 text-2xl font-bold col-span-2">Nenhum produto por enquanto...</h2>
+              <h2 className="mt-4 text-2xl font-bold col-span-2">
+                Nenhum produto por enquanto...
+              </h2>
             </>
           ) : (
             <>
-              {filteredProducts.map((product) => {
-                if (product.foto === null) product.foto = "";
-                return (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    category={product.categoria}
-                  />
-                );
-              })}
+              <PaginatedItems items={filteredProducts} itemsPerPage={6} />
             </>
           )}
         </div>

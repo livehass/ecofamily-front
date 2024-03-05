@@ -31,9 +31,9 @@ function Login() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold ">
+      <div className="flex flex-col justify-center items-center h-screen font-bold bg-gray-100">
         <form
-          className="flex justify-center items-center flex-col w-1/2 gap-4"
+          className="bg-white py-12 px-8 rounded-lg drop-shadow flex justify-center items-center flex-col w-1/4 gap-4"
           onSubmit={login}
         >
           <h2 className="text-slate-900 text-5xl ">Entrar</h2>
@@ -44,7 +44,7 @@ function Login() {
               id="email"
               name="email"
               placeholder="Email"
-              className="border-2 border-slate-700 rounded p-2"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
               onChange={(e: ChangeEvent<HTMLInputElement>) => updateState(e)}
             />
           </div>
@@ -55,13 +55,13 @@ function Login() {
               id="senha"
               name="senha"
               placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
               onChange={(e: ChangeEvent<HTMLInputElement>) => updateState(e)}
             />
           </div>
           <button
             type="submit"
-            className="rounded bg-indigo-400 hover:bg-indigo-900 text-white w-1/2 py-2 flex justify-center"
+            className="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
             {isLoading ? (
               <RotatingLines
@@ -78,14 +78,14 @@ function Login() {
 
           <hr className="border-slate-800 w-full" />
 
-          <p>
+          <p className="text-sm font-light text-gray-500 dark:text-gray-400">
             Ainda não tem uma conta?{" "}
             <Link to="/cadastrar" className="text-indigo-800 hover:underline">
               Cadastre-se
             </Link>
           </p>
         </form>
-        <div className="fundoLogin hidden lg:block"></div>
+        <div className="font-medium text-green-600 hover:underline dark:text-green-500"></div>
       </div>
     </>
   );

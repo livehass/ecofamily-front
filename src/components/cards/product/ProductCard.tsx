@@ -7,6 +7,9 @@ import { sortBy } from "sort-by-typescript";
 export default function ProductCard({ product }: { product: Product }) {
   const { favProducts, setFavProducts, cartProducts, setCartProducts, user } =
     useContext(AuthContext);
+
+  if (product.foto === null) product.foto = "";
+
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <Link to={`/produtos/${product.id}`}>

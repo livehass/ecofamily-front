@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/UserContext";
 import AuthProviderProps from "../../model/AuthProviderProps";
 import { login } from "../../service/Service";
 import Product from "../../model/Product";
+import { toasts } from "../../util/toasts";
 
 export default function AuthProvider({ children }: AuthProviderProps) {
   const initialUser: UserLogin = {
@@ -38,23 +39,25 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       localStorage.getItem("cartProducts") || JSON.stringify([])
     ) as Product[];
   };
-  const [cartProducts, setCartProducts] = useState<Product[]>(localCartProducts);
+  const [cartProducts, setCartProducts] =
+    useState<Product[]>(localCartProducts);
 
   async function handleLogin(userLogin: UserLogin) {
     setIsLoading(true);
     try {
-      await login("usuarios/login", userLogin, setUser);
-      alert("User logged sucessfully");
+      const response = await login("usuarios/login", userLogin, setUser);
+      toasts(`Olá, ${response.data.nome}`, "success");
       setIsLoading(false);
     } catch (error) {
       console.log(error);
-      alert("Inconsistent user data");
+      toasts("Email ou senha incorretos", "error");
       setIsLoading(false);
     }
   }
   function handleLogout() {
     setUser(initialUser);
     sessionStorage.clear();
+    location.pathname = "/";
   }
 
   useEffect(() => {

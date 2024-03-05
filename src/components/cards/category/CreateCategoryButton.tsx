@@ -5,7 +5,7 @@ export default function CreateCategoryButton() {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <article className="bg-white border border-gray-300 border-l-8 border-l-fuchsia-600 rounded-lg shadow transition-all flex flex-col items-center justify-center">
+    <article className="bg-white border border-gray-300 border-l-8 border-l-green-600 rounded-lg shadow transition-all flex flex-col items-center justify-center">
       <button
         onClick={() => {
           if (isClicked) setIsClicked(false);

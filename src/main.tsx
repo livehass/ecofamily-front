@@ -10,7 +10,6 @@ import Login from "./pages/login/Login.tsx";
 import Register, { createNewUser } from "./pages/register/Register.tsx";
 import AuthProvider from "./components/authProvider/AuthProvider.tsx";
 import Categories from "./components/lists/Categories.tsx";
-import Products from "./components/lists/Products.tsx";
 import { loader as categoryLoader } from "./components/lists/Categories.tsx";
 import { action as categoryAction } from "./components/forms/CategoryForm.tsx";
 import { loader as productLoader } from "./components/lists/Products.tsx";
@@ -66,6 +65,12 @@ const router = createBrowserRouter([
         element: <CategoryContainer />,
         loader: singularCategoryLoader,
         action: singleCategoryAction,
+      },
+      {
+        path: "/categorias",
+        element: <Categories />,
+        loader: categoryLoader,
+        action: categoryAction,
       },
       {
         path: "categorias/:id/delete",

@@ -47,19 +47,19 @@ function Navbar() {
             </ScrollLink>
           )}
 
-          <div className="flex items-center bg-gray-50 border rounded-md h-9 px-1 flex-grow has-[:focus-visible]:bg-gray-200/80">
+          {/* <div className="flex items-center bg-gray-50 border rounded-md h-9 px-1 flex-grow has-[:focus-visible]:bg-gray-200/80">
             <input
               id="Search"
               type="search"
               placeholder="Busque um produto"
               className="bg-transparent h-full flex-grow text-green-700 text-sm px-1 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
               onChange={(e) => {
-                if (e.target.value.length == 1)
+                if (e.target.value.length == 1 && location.pathname == "/")
                   document.getElementById("btn-explorar")?.click();
               }}
             />
             <i className="fa-solid fa-magnifying-glass text-green-700"></i>
-          </div>
+          </div> */}
 
           <ul className="flex gap-4 items-center">
             <li
@@ -257,10 +257,10 @@ function Navbar() {
                         </li>
                         <li>
                           <NavLink
-                            to={"/nova-categoria"}
+                            to={"/categorias"}
                             className="block px-4 py-2 hover:bg-gray-100"
                           >
-                            Nova categoria
+                            Categorias
                           </NavLink>
                         </li>
                       </>

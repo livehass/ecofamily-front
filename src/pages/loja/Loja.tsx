@@ -5,9 +5,11 @@ import ProductCard from "../../components/cards/product/ProductCard";
 import LoadingCategoryCardContainer from "../../components/cards/category/LoadingCategoryCardContainer";
 import User from "../../model/User";
 import Category from "../../model/Category";
+import PaginatedItems from "../../components/pagination/PaginatedItems";
 
 export async function lojaLoader({ params }) {
   if (
+    sessionStorage.getItem("userLogin") !== null &&
     JSON.parse(sessionStorage.getItem("userLogin") as string).tipo === 0 &&
     JSON.parse(sessionStorage.getItem("userLogin") as string).id != params.id
   )
@@ -32,7 +34,7 @@ export default function Products() {
 
   return (
     <>
-      <div className="w-full min-h-screen py-20">
+      <div className="w-full min-h-screen py-20 bg-gray-50">
         <h2 className="text-2xl font-bold py-4 px-8 md:text-4xl md:mt-12 flex items-center gap-4 mb-4">
           <img
             className="object-cover size-20 p-1 rounded-full ring-2 ring-emerald-300"
@@ -90,12 +92,7 @@ export default function Products() {
               </h2>
             </>
           ) : (
-            <>
-              {filteredProducts.map((product) => {
-                if (product.foto === null) product.foto = "";
-                return <ProductCard key={product.id} product={product} />;
-              })}
-            </>
+            <PaginatedItems items={filteredProducts} itemsPerPage={6} />
           )}
         </div>
       </div>
