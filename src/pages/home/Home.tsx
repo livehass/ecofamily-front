@@ -14,7 +14,7 @@ function Home() {
   return (
     <>
       <Element name="home">
-        <div id="hero" className="md:pt-28 flex justify-center min-h-screen">
+        <div id="hero" className="md:pt-28 flex justify-center min-h-screen hero">
           <div className="container grid grid-cols-1 text-white bg-white/40 backdrop-blur-lg md:backdrop-blur-0 md:bg-transparent">
             <div className="flex flex-col gap-4 items-center justify-center py-4">
               <h2 className="md:text-7xl text-4xl font-bold text-gray-900 mt-56">
