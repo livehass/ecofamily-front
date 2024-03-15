@@ -34,6 +34,7 @@ import NovoProduto, {
   novoProdutoLoader,
 } from "./pages/novoProduto/NovoProduto.tsx";
 import Loja, { lojaLoader } from "./pages/loja/Loja.tsx";
+import AboutUs from "./pages/about/About.tsx";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,11 @@ const router = createBrowserRouter([
         path: "/lojas/:id",
         element: <Loja />,
         loader: lojaLoader,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+        
       },
     ],
   },
