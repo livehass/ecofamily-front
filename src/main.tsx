@@ -35,6 +35,7 @@ import NovoProduto, {
 } from "./pages/novoProduto/NovoProduto.tsx";
 import Loja, { lojaLoader } from "./pages/loja/Loja.tsx";
 import AboutUs from "./pages/about/About.tsx";
+import NotFound from "./components/pageNotFound/PageNotFound.tsx";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +107,11 @@ const router = createBrowserRouter([
         element: <AboutUs />,
         
       },
+      {
+        path: "*",
+        element: <NotFound />,
+        
+      },
     ],
   },
 ]);
@@ -113,7 +119,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
     </AuthProvider>
   </React.StrictMode>
 );
